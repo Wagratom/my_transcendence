@@ -9,7 +9,6 @@ import PhotoMobal from '../../assets/game/PhotoLoginPage.jpg'
 export function Login() {
 	const [handleForm, setHandleForm] = useState<string>('Login');
 
-
 	const HtmlToMobile = () => {
 		return (
 			<>

@@ -1,5 +1,6 @@
-import React from 'react';
+import { MouseEvent, MouseEventHandler } from 'react';
 import './Login.css';
+import axios from 'axios';
 
 type propsFormulario = {
 	handleForm: React.Dispatch<React.SetStateAction<string>>
@@ -8,16 +9,56 @@ export default function FormularioLogin(props: propsFormulario) {
 	// Component that renders the login form
 	// The HTML blocks are created in functions to facilitate code readability and are called within the form in the function's return
 
+
+	const activateValidAndInvalidFeedback = (username: string, password: string) => {
+		const updateClassList = (elementId: string, isValid: boolean) => {
+			const element = document.getElementById(elementId);
+			if (element) {
+				element.classList.remove('is-invalid');
+				element.classList.toggle('is-invalid', !isValid);
+			}
+		};
+
+		updateClassList('username', !!username);
+		updateClassList('password', !!password);
+	};
+
+
+	// Function that checks if the user exists in the database
+	const checkUser = (event: React.MouseEvent<HTMLButtonElement>) => {
+		let formData = new FormData(document.getElementById('form__login') as HTMLFormElement);
+		let username = formData.get('username') as string
+		let password = formData.get('password') as string
+		activateValidAndInvalidFeedback(username, password)
+		let body = {
+			login: formData.get('username'),
+			password: formData.get('password')
+		}
+		axios.post('http://localhost:3000/login', body)
+			.then((response) => {
+				if (response.status === 200) {
+					console.log('User logged in successfully')
+				}
+				console.log(response)
+			}).catch((error) => {
+				if (error.response.status === 404) {
+					alert('User not found')
+				}
+			})
+	}
+
+
 	const Username_Password = () => {
 		return (
 			<>
 				<div className="form-group mb-3">
-					<label htmlFor="email">username</label>
-					<input type="email" className="form-control my-2" id="email" placeholder="Login Name" />
+					<label htmlFor="username">username</label>
+					<input type="text" className="form-control my-2" name="username" id="username" placeholder="Login Name" />
 				</div>
+
 				<div className="form-group mb-3">
 					<label htmlFor="password">password</label>
-					<input type="password" className="form-control my-2" id="password" placeholder="Password" />
+					<input type="password" className="form-control my-2" name="password" id="password" placeholder="Password" />
 				</div>
 			</>
 		)
@@ -36,20 +77,28 @@ export default function FormularioLogin(props: propsFormulario) {
 	const Login_Register = () => {
 		return (
 			<div className='buttonsForm d-flex flex-column align-items-center'>
-				<button type="submit" className="btn btn-primary w-75 d-block mb-2">Login</button>
+				<button type="button" className="btn btn-primary w-75 d-block mb-2" onClick={checkUser}>Login</button>
 				<span>Need an account?
 					<span className='singUp' onClick={() => props.handleForm('Register')}> Sign up </span>
+
 				</span>
 			</div>
 		)
 	}
 
+	const PrintInvalidUser = () => {
+		return (
+			<div>Invalid username or password</div>
+		)
+	}
+
 
 	return (
-		<form className='w-100'>
+		<form className='w-100' id='form__login'>
 			{Username_Password()}
 			{ForgetPassword()}
 			{Login_Register()}
+			{PrintInvalidUser()}
 		</form>
 	)
 }
