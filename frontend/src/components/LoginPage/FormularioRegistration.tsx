@@ -1,6 +1,7 @@
 import axios from 'axios';
 import './Login.css';
 import React, { useRef } from 'react';
+import { TiArrowBack } from "react-icons/ti";
 
 
 type propsFormulario = {
@@ -20,7 +21,6 @@ export default function Formulario(props: propsFormulario) {
 	const activateFeedback = () => {
 		const updateClassList = (element: React.RefObject<HTMLInputElement>, isValid: boolean) => {
 			if (element) {
-				element.current?.classList.remove('is-invalid');
 				element.current?.classList.toggle('is-invalid', !isValid);
 			}
 		};
@@ -49,14 +49,17 @@ export default function Formulario(props: propsFormulario) {
 			password: password,
 			email: email
 		}
-		axios.post('http://localhost:3000/register', body)
+
+		axios.post('http://localhost:3000/login/register', body)
 			.then((response) => {
 				if (response.status === 200) {
-					console.log('User registred in successfully')
+					props.handleForm('Login')
 				}
 				console.log(response)
 			}).catch((error) => {
+				if (error.status === 209) {
 
+				}
 			})
 	}
 
@@ -142,6 +145,9 @@ export default function Formulario(props: propsFormulario) {
 
 	return (
 		<form className='w-100' id='form__register'>
+			<div className='to__back__login' onClick={() => props.handleForm('Login')}>
+				<TiArrowBack color='white' size={25} />
+			</div>
 			{FieldsForm()}
 			{Login_Register()}
 		</form>

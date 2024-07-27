@@ -55,6 +55,22 @@
 
 }
 
+h1,
+.formulario label {
+  font-family: '8bits';
+}
+
+.to__back__login {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  color: white;
+  cursor: pointer;
+  margin: 1rem;
+  display: none;
+  z-index: 1;
+}
 
 .photoLoginInLoginScreen {
   background-image: url('../../assets/game/PhotoLoginPage.jpg');
@@ -82,12 +98,6 @@
 }
 
 
-h1,
-.formulario label {
-  font-family: '8bits';
-}
-
-
 .welcome {
   display: flex;
   flex-wrap: wrap;
@@ -108,6 +118,7 @@ h1,
   color: #7a7488;
   cursor: pointer;
 }
+
 
 @media screen and (max-width: 768px) {
   .photoLoginInLoginScreen {
@@ -144,5 +155,9 @@ h1,
 
   #sign_in__register {
     display: none;
+  }
+
+  .to__back__login {
+    display: block;
   }
 }
