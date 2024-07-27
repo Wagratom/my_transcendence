@@ -1,7 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
 export default class UserResponseDto {
-
   @IsNotEmpty()
   username: string;
 
@@ -13,7 +12,6 @@ export default class UserResponseDto {
 
   @IsNotEmpty()
   avatar: string;
-
 
   constructor(user: any) {
     this.username = user.username;
