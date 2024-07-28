@@ -1,11 +1,11 @@
 import { UserCredentials } from '../dto/login.dto';
-import UserResponseDto from '../dto/login.response.dto';
+import { LoginDefaultResponseDto, LoginAuthResponseDto } from '../dto/login.response.dto';
 
 export default interface LoginServiceInterface {
-  login(userData: UserCredentials): Promise<UserResponseDto>;
+  login(userData: UserCredentials): Promise<LoginAuthResponseDto>;
   logout(userData: UserCredentials): Promise<boolean>;
-  register(userData: UserCredentials): Promise<UserResponseDto>;
-  forgotPassword(userData: UserCredentials): Promise<UserResponseDto>;
-  resetPassword(userData: UserCredentials): Promise<UserResponseDto>;
-  changePassword(userData: UserCredentials): Promise<UserResponseDto>;
+  register(userData: UserCredentials): Promise<LoginDefaultResponseDto>;
+  forgotPassword(userData: UserCredentials): Promise<LoginDefaultResponseDto>;
+  resetPassword(userData: UserCredentials): Promise<LoginDefaultResponseDto>;
+  changePassword(userData: UserCredentials): Promise<LoginDefaultResponseDto>;
 }

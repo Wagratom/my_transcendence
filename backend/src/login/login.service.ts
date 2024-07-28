@@ -3,49 +3,57 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import LoginServiceInterface from './interface/login.service.interface';
 import {
   ChangePasswordDto,
   ForgotPasswordDto,
   RegisterUserDto,
   UserCredentials,
 } from './dto/login.dto';
-import UserResponseDto from './dto/login.response.dto';
+
+import LoginServiceInterface from './interface/login.service.interface';
+import {LoginDefaultResponseDto, LoginAuthResponseDto} from './dto/login.response.dto';
 import LoginRepository from './login.repository';
+import { JwtService } from '@nestjs/jwt';
+
 
 @Injectable()
 export class LoginService implements LoginServiceInterface {
-  constructor(private readonly prismaService: LoginRepository) {}
+  constructor(
+    private readonly prismaService: LoginRepository,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  async login(userData: UserCredentials): Promise<UserResponseDto> {
+  async login(userData: UserCredentials): Promise<LoginAuthResponseDto> {
     let user = await this.prismaService.findUser(userData);
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (user) {
+      const payload = { sub: user.id, username: user.login };
+      const token = this.jwtService.sign(payload);
+      return new LoginAuthResponseDto(user, token);
     }
-    return  user
+    throw new NotFoundException('User not found');
   }
 
   async logout(userData: UserCredentials): Promise<boolean> {
     return this.prismaService.logout(userData);
   }
 
-  async register(userData: RegisterUserDto): Promise<UserResponseDto> {
+  async register(userData: RegisterUserDto): Promise<LoginDefaultResponseDto> {
     let user = await this.prismaService.findUser(userData)
     if (user) {
       throw new ConflictException('User already exist')
     }
-    return new  UserResponseDto(await this.prismaService.register(userData));
+    return  await this.prismaService.register(userData);
   }
 
-  async forgotPassword(userData: ForgotPasswordDto): Promise<UserResponseDto> {
-    return this.prismaService.forgotPassword(userData);
+  async forgotPassword(userData: ForgotPasswordDto): Promise<LoginDefaultResponseDto> {
+    return await this.prismaService.forgotPassword(userData);
   }
 
-  async resetPassword(userData: ChangePasswordDto): Promise<UserResponseDto> {
-    return this.prismaService.changePassword(userData);
+  async resetPassword(userData: ChangePasswordDto): Promise<LoginDefaultResponseDto> {
+    return await this.prismaService.changePassword(userData);
   }
 
-  async changePassword(userData: ChangePasswordDto): Promise<UserResponseDto> {
-    return this.prismaService.changePassword(userData);
+  async changePassword(userData: ChangePasswordDto): Promise<LoginDefaultResponseDto> {
+    return  await this.prismaService.changePassword(userData);
   }
 }

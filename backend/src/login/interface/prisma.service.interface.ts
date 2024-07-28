@@ -1,16 +1,17 @@
+import { User } from '@prisma/client';
 import {
   ChangePasswordDto,
   ForgotPasswordDto,
   RegisterUserDto,
   UserCredentials,
 } from '../dto/login.dto';
-import UserResponseDto from '../dto/login.response.dto';
+import { LoginDefaultResponseDto } from '../dto/login.response.dto';
 
 export default interface LoginRepositoryInterface {
-  findUser(userData: UserCredentials): Promise<UserResponseDto>;
-  login(userData: UserCredentials): Promise<UserResponseDto>;
+  findUser(userData: UserCredentials): Promise<User>;
+  login(userData: UserCredentials): Promise<LoginDefaultResponseDto>;
   logout(userData: UserCredentials): Promise<boolean>;
-  register(userData: RegisterUserDto): Promise<UserResponseDto>;
-  forgotPassword(userData: ForgotPasswordDto): Promise<UserResponseDto>;
-  changePassword(userData: ChangePasswordDto): Promise<UserResponseDto>;
+  register(userData: RegisterUserDto): Promise<LoginDefaultResponseDto>;
+  forgotPassword(userData: ForgotPasswordDto): Promise<LoginDefaultResponseDto>;
+  changePassword(userData: ChangePasswordDto): Promise<LoginDefaultResponseDto>;
 }

@@ -1,6 +1,7 @@
+import { User } from '@prisma/client';
 import { IsNotEmpty } from 'class-validator';
 
-export default class UserResponseDto {
+export class LoginDefaultResponseDto {
   @IsNotEmpty()
   username: string;
 
@@ -13,11 +14,23 @@ export default class UserResponseDto {
   @IsNotEmpty()
   avatar: string;
 
-  constructor(user: any) {
-    console.log(user)
+  constructor(user: User) {
     this.username = user.login;
     this.nickname = user.nickname;
     this.email = user.email;
     this.avatar = user.avatar;
+  }
+
+}
+
+
+export class LoginAuthResponseDto extends LoginDefaultResponseDto {
+  @IsNotEmpty()
+  token: string;
+
+
+  constructor(user: User, token: string) {
+    super(user);
+    this.token = token;
   }
 }

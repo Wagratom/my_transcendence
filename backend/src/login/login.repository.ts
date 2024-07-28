@@ -6,34 +6,33 @@ import {
   RegisterUserDto,
   UserCredentials,
 } from './dto/login.dto';
-import UserResponseDto from './dto/login.response.dto';
+import { LoginDefaultResponseDto } from './dto/login.response.dto';
 import { PrismaService } from 'src/PrismaDB/prisma.connect';
+import { User } from '@prisma/client';
 
 @Injectable()
 export default class LoginRepository implements LoginRepositoryInterface {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findUser(userData: UserCredentials): Promise<UserResponseDto> {
+  async findUser(userData: UserCredentials): Promise<User> {
     let user = await this.prismaService.user.findUnique({
       where: {
         login: userData.login,
         password: userData.password,
       },
     });
-    if (!user) {
-      return null;
-    }
-    return new UserResponseDto(user);
+
+    return user
   }
 
-  async login(userData: UserCredentials): Promise<UserResponseDto> {
+  async login(userData: UserCredentials): Promise<LoginDefaultResponseDto> {
     let user = await this.prismaService.user.findUnique({
       where: {
         login: userData.login,
         password: userData.password,
       },
     });
-    return new UserResponseDto(user);
+    return new LoginDefaultResponseDto(user);
   }
 
   async logout(userData: UserCredentials): Promise<boolean> {
@@ -49,7 +48,7 @@ export default class LoginRepository implements LoginRepositoryInterface {
     return true;
   }
 
-  async register(userData: RegisterUserDto): Promise<UserResponseDto> {
+  async register(userData: RegisterUserDto): Promise<LoginDefaultResponseDto> {
     let newUser = await this.prismaService.user.create({
       data: {
         login: userData.login,
@@ -57,10 +56,10 @@ export default class LoginRepository implements LoginRepositoryInterface {
         email: userData.email,
       },
     });
-    return new UserResponseDto(newUser);
+    return new LoginDefaultResponseDto(newUser);
   }
 
-  async forgotPassword(userData: ForgotPasswordDto): Promise<UserResponseDto> {
+  async forgotPassword(userData: ForgotPasswordDto): Promise<LoginDefaultResponseDto> {
     let user = await this.prismaService.user.update({
       where: {
         email: userData.email,
@@ -69,11 +68,11 @@ export default class LoginRepository implements LoginRepositoryInterface {
         password: userData.password,
       },
     });
-    return new UserResponseDto(user);
+    return new LoginDefaultResponseDto(user);
   }
 
-  async resetPassword(userData: ChangePasswordDto): Promise<UserResponseDto> {
-    let user = this.prismaService.user.update({
+  async resetPassword(userData: ChangePasswordDto): Promise<LoginDefaultResponseDto> {
+    let user = await this.prismaService.user.update({
       where: {
         login: userData.login,
         password: userData.password,
@@ -82,11 +81,11 @@ export default class LoginRepository implements LoginRepositoryInterface {
         password: userData.newPassword,
       },
     });
-    return new UserResponseDto(user);
+    return new LoginDefaultResponseDto(user);
   }
 
-  async changePassword(userData: ChangePasswordDto): Promise<UserResponseDto> {
-    let user = this.prismaService.user.update({
+  async changePassword(userData: ChangePasswordDto): Promise<LoginDefaultResponseDto> {
+    let user = await this.prismaService.user.update({
       where: {
         login: userData.login,
         password: userData.password,
@@ -95,6 +94,6 @@ export default class LoginRepository implements LoginRepositoryInterface {
         password: userData.newPassword,
       },
     });
-    return new UserResponseDto(user);
+    return new LoginDefaultResponseDto(user);
   }
 }
