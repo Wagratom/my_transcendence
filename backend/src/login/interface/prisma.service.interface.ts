@@ -8,7 +8,7 @@ import {
 import { LoginDefaultResponseDto } from '../dto/login.response.dto';
 
 export default interface LoginRepositoryInterface {
-  findUser(userData: UserCredentials): Promise<User>;
+  findUser(login: string, password: string): Promise<User>;
   login(userData: UserCredentials): Promise<LoginDefaultResponseDto>;
   logout(userData: UserCredentials): Promise<boolean>;
   register(userData: RegisterUserDto): Promise<LoginDefaultResponseDto>;

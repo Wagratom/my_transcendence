@@ -24,7 +24,7 @@ export class LoginService implements LoginServiceInterface {
   ) {}
 
   async login(userData: UserCredentials): Promise<LoginAuthResponseDto> {
-    let user = await this.prismaService.findUser(userData);
+    let user = await this.prismaService.findUser(userData.login, userData.password);
     if (user) {
       const payload = { sub: user.id, username: user.login };
       const token = this.jwtService.sign(payload);
@@ -38,7 +38,7 @@ export class LoginService implements LoginServiceInterface {
   }
 
   async register(userData: RegisterUserDto): Promise<LoginDefaultResponseDto> {
-    let user = await this.prismaService.findUser(userData)
+    let user = await this.prismaService.findUser(userData.login, userData.password);
     if (user) {
       throw new ConflictException('User already exist')
     }

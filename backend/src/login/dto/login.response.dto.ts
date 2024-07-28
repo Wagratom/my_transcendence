@@ -20,7 +20,6 @@ export class LoginDefaultResponseDto {
     this.email = user.email;
     this.avatar = user.avatar;
   }
-
 }
 
 
