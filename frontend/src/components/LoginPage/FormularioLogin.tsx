@@ -1,4 +1,4 @@
-import { MouseEvent, MouseEventHandler } from 'react';
+import { useRef } from 'react';
 import './Login.css';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ type propsFormulario = {
 export default function FormularioLogin(props: propsFormulario) {
 	// Component that renders the login form
 	// The HTML blocks are created in functions to facilitate code readability and are called within the form in the function's return
-
+	const invalidUser = useRef<HTMLDivElement>(null);
 
 	const activateValidAndInvalidFeedback = (username: string, password: string) => {
 		const updateClassList = (elementId: string, isValid: boolean) => {
@@ -34,15 +34,14 @@ export default function FormularioLogin(props: propsFormulario) {
 			login: formData.get('username'),
 			password: formData.get('password')
 		}
-		axios.post('http://localhost:3000/login', body)
+		axios.post('http://localhost:3000/login', body, {timeout:  5000})
 			.then((response) => {
 				if (response.status === 200) {
 					console.log('User logged in successfully')
 				}
-				console.log(response)
 			}).catch((error) => {
 				if (error.response.status === 404) {
-					alert('User not found')
+					invalidUser.current?.classList.add('d-block');
 				}
 			})
 	}
@@ -68,7 +67,7 @@ export default function FormularioLogin(props: propsFormulario) {
 	const ForgetPassword = () => {
 		return (
 			<div className='d-flex justify-content-between mb-5'>
-				<a style={{ color: '#b61758' }} href="bla">Forget your password?</a>
+				<a style={{ color: '#8c89a2' }} href="/">Forget your password?</a>
 			</div>
 		)
 	}
@@ -78,9 +77,9 @@ export default function FormularioLogin(props: propsFormulario) {
 		return (
 			<div className='buttonsForm d-flex flex-column align-items-center'>
 				<button type="button" className="btn btn-primary w-75 d-block mb-2" onClick={checkUser}>Login</button>
-				<span>Need an account?
+				<span className='div__signUp'
+				>Need an account?
 					<span className='singUp' onClick={() => props.handleForm('Register')}> Sign up </span>
-
 				</span>
 			</div>
 		)
@@ -88,17 +87,29 @@ export default function FormularioLogin(props: propsFormulario) {
 
 	const PrintInvalidUser = () => {
 		return (
-			<div>Invalid username or password</div>
+			<div
+			id='invalidUser'
+			ref={invalidUser}
+			style={{
+				marginBottom: '1rem',
+				color: '#b61758',
+				display: 'none'
+			}}
+			>
+				Invalid username or password
+			</div>
 		)
 	}
 
 
 	return (
-		<form className='w-100' id='form__login'>
-			{Username_Password()}
-			{ForgetPassword()}
-			{Login_Register()}
-			{PrintInvalidUser()}
-		</form>
+		<>
+			<form className='w-100' id='form__login'>
+				{PrintInvalidUser()}
+				{Username_Password()}
+				{ForgetPassword()}
+				{Login_Register()}
+			</form>
+		</>
 	)
 }

@@ -1,9 +1,7 @@
 import { useState } from 'react';
-
 import FormularioLogin from './FormularioLogin';
 import FormularioRegistration from './FormularioRegistration';
 import './Login.css';
-
 import PhotoMobal from '../../assets/game/PhotoLoginPage.jpg'
 
 export function Login() {
@@ -30,7 +28,7 @@ export function Login() {
 						<h1 className='text-center'>SPACE PONG</h1>
 					</div>
 					{HtmlToMobile()}
-					{handleForm === 'Login' ? <FormularioLogin handleForm={setHandleForm} /> : <FormularioRegistration handleForm={setHandleForm}/>}
+					{handleForm === 'Login' ? <FormularioLogin handleForm={setHandleForm} /> : <FormularioRegistration handleForm={setHandleForm} />}
 				</div>
 				<div className='text-center photoLoginInLoginScreen'></div>
 			</div>
