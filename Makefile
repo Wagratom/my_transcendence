@@ -4,6 +4,10 @@ env:
 	@echo 'POSTGRES_PASSWORD=example' >> .env
 	@echo 'POSTGRES_DB=example' >> .env
 
+	@touch backend/.env
+	@echo 'DATABASE_URL=postgresql://example:example@db:5432/example' >> backend/.env
+	@echo 'JWT_SECRET=example' >> backend/.env
+
 
 up:
 	docker compose up -d
