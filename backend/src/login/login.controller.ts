@@ -25,8 +25,8 @@ export class LoginController {
     const userData = await this.service.login(body);
     response.cookie('jwt', userData.token, {
       httpOnly: false,
-      secure: false, // Use true em produção, quando estiver usando HTTPS
-      sameSite: 'strict' // ou 'strict' conforme necessário
+      secure:  process.env.NODE_ENV === 'production',
+      sameSite: 'none' // ou 'strict' conforme necessário
     });
    return userData
   }

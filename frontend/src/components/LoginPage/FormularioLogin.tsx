@@ -38,11 +38,10 @@ export default function FormularioLogin(props: propsFormulario) {
 			login: formData.get('username'),
 			password: formData.get('password')
 		}
-		axios.post('http://localhost:3000/login', body, {timeout:  5000})
+		axios.post('http://localhost:3000/login', body, {timeout:  5000, withCredentials: true})
 			.then((response) => {
-				console.log(Cookies.get('jwt'))
 				if (response.status === 200) {
-					// navigate('/game')
+					navigate('/game')
 				}
 			}).catch((error) => {
 				if (error.response.status === 404) {
