@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 type propsFormulario = {
@@ -39,8 +40,9 @@ export default function FormularioLogin(props: propsFormulario) {
 		}
 		axios.post('http://localhost:3000/login', body, {timeout:  5000})
 			.then((response) => {
+				console.log(Cookies.get('jwt'))
 				if (response.status === 200) {
-					navigate('/game')
+					// navigate('/game')
 				}
 			}).catch((error) => {
 				if (error.response.status === 404) {

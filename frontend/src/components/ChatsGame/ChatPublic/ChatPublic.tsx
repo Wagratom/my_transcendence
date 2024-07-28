@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect } from "react";
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { UserData } from "../../InitialPage/Contexts/Contexts";
+import { UserData } from "../../Contexts/Contexts";
 import bgChatPublic from "../../../assets/game/bgChatPublic.png";
 import RightSide from "./RightSide";
 import ModalIsBanned from "./ModalIsBanned";

@@ -5,7 +5,7 @@ import MiniPerfilUser from './MiniPerfilUser';
 import Options from './options';
 import ListFriends from './ListFriends';
 import { Players } from './ListFriends';
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 
 type propsMiniProfile = {
 	showMiniPerfil: React.Dispatch<React.SetStateAction<string>>;

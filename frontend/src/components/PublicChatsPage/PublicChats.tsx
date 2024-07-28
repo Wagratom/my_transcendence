@@ -8,7 +8,7 @@ import axios from 'axios';
 import './PublicChats.css';
 import ButtonClosed from '../GamePage/Game/ButtonClosed';
 import ChatPublic from '../ChatsGame/ChatPublic/ChatPublic';
-import { UserData } from '../InitialPage/Contexts/Contexts';
+import { UserData } from '../Contexts/Contexts';
 
 export type t_chat = {
 	id: string;

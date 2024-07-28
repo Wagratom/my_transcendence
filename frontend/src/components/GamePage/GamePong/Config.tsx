@@ -3,7 +3,7 @@ import barInitial from '../../../assets/game/bar/barInitial.png';
 import ball from '../../../assets/game/ball2.png';
 import { Socket } from 'socket.io-client';
 import { useContext } from 'react';
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 const userData = useContext(UserData).user;
 interface DataRoom {
 	Player1: string,

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { CustomScene } from "./Config";
 import React, { useContext, useEffect } from 'react';
-import { UserData } from "../../InitialPage/Contexts/Contexts";
+import { UserData } from "../../Contexts/Contexts";
 
 
 export default function GamePong(): JSX.Element {

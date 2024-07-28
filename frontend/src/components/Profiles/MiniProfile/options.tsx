@@ -5,7 +5,7 @@ import { MdPersonRemoveAlt1, MdPersonAddAlt1 } from "react-icons/md";
 import { MdBlock } from "react-icons/md";
 
 import React, { useContext, useState } from 'react';
-import { UserData } from "../../InitialPage/Contexts/Contexts";
+import { UserData } from "../../Contexts/Contexts";
 
 const URLS_MiniPerfilPlayers = {
 	'personal': `${process.env.REACT_APP_HOST_URL}/users/friends`,

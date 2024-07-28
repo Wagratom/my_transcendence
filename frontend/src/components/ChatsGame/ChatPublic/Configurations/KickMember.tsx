@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { IconType } from "react-icons";
 import InputButton from "./InputButton";
-import { UserData } from "../../../InitialPage/Contexts/Contexts";
+import { UserData } from "../../../Contexts/Contexts";
 
 type KickMemberProps = {
 	Icon: IconType;

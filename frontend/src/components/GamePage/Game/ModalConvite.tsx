@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import { UserData } from "../../InitialPage/Contexts/Contexts";
+import { UserData } from "../../Contexts/Contexts";
 import { useContext } from "react";
 import { dataConvite } from "./Game";
 

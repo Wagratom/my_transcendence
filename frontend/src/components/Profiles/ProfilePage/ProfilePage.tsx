@@ -1,4 +1,4 @@
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 import MatchHistory from './MatchHistory';
 import Perfil from './Perfil/Perfil';
 import { useContext } from 'react';

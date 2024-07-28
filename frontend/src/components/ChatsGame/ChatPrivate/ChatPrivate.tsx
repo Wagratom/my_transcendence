@@ -5,7 +5,7 @@ import InputChats from '../InputChats';
 import './ChatPrivate.css'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 import TitleChatPrivate from './Title';
 import { Socket } from 'socket.io-client';
 

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ReactComponent as CoinIcon } from '../../assets/store/coin.svg';
-import { UserData } from '../InitialPage/Contexts/Contexts';
+import { UserData } from '../Contexts/Contexts';
 
 export default function Coins(): JSX.Element {
 	const {user: {coins}} = useContext(UserData)

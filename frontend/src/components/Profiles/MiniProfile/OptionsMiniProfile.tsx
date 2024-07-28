@@ -4,7 +4,7 @@ import { IoMdExit } from 'react-icons/io';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 
 type propsSelectConfiuration = {
 	showMiniPerfil: React.Dispatch<React.SetStateAction<string>>;

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req, Res } from '@nestjs/common';
 import {
   ChangePasswordDto,
   RegisterUserDto,
@@ -8,7 +8,7 @@ import {
 
 import { LoginService } from './login.service';
 import { LoginAuthResponseDto, LoginDefaultResponseDto } from './dto/login.response.dto';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 
 @Controller('login')
 export class LoginController {
@@ -18,12 +18,13 @@ export class LoginController {
   @HttpCode(HttpStatus.OK)
   async login(
     @Body() body: UserCredentials,
-    @Res({ passthrough: true }) response: Response
+    @Res({ passthrough: true }) response: Response,
+    @Req() req: Request
   ) : Promise<LoginAuthResponseDto>
   {
     const userData = await this.service.login(body);
     response.cookie('jwt', userData.token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: false, // Use true em produção, quando estiver usando HTTPS
       sameSite: 'strict' // ou 'strict' conforme necessário
     });

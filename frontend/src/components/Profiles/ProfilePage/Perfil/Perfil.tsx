@@ -1,4 +1,4 @@
-import { UserData } from '../../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../../Contexts/Contexts';
 import { useContext, useEffect, useState } from 'react';
 import { InfosUserPerfil } from '../../typesProfile';
 import HandleRank from '../../RankMapings';

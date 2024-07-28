@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { ReactComponent as UnicCoin } from '../../../assets/store/unicCoin.svg'
-import { UserData } from "../../InitialPage/Contexts/Contexts"
+import { UserData } from "../../Contexts/Contexts"
 // import { Tooltip } from "react-tooltip"
 import bgLua from "../../../assets/game/planets/backgrounds/bgLuaStore.jpg";
 

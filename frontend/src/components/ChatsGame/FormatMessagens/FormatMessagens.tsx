@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ChatContext, Messages } from "../ChatPublic/ChatPublic";
 import MessageUser from "./MessageUser";
 import MessagePeople from "./MessagePeople";
-import { t_dataUser } from "../../InitialPage/Contexts/Contexts";
+import { t_dataUser } from "../../Contexts/Contexts";
 
 type propsFormatMessages = {
 	messagens: Messages[],

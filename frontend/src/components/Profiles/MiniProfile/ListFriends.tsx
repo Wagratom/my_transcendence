@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import ChatPrivate from '../../ChatsGame/ChatPrivate/ChatPrivate';
 import DinamicProfile from '../DinamicProfile/DinamicProfile';
 import { IoGameControllerOutline } from "react-icons/io5";
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 
 export type Players = {
 	avatar: string,

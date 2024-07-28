@@ -1,4 +1,4 @@
-import { UserData } from '../../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../../Contexts/Contexts';
 import { FormEvent, useContext, useState } from 'react';
 import IdentifyInputName from "./IdentifyInputName";
 import InputEditName from "./InputEditName";

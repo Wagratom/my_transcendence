@@ -1,5 +1,5 @@
 import { IoMdArrowDropdown } from 'react-icons/io';
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 import React, { useContext, useState } from 'react';
 import Status from './PlayersStatus';
 import ConfigurationGame from './Configurations/Configurations';

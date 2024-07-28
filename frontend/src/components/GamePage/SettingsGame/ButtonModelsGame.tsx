@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { UserData } from "../../InitialPage/Contexts/Contexts"
+import { UserData } from "../../Contexts/Contexts"
 
 type propsButtonPlay = {
 	photo: string,

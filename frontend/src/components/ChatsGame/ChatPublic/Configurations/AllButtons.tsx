@@ -8,7 +8,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { ChatContext } from "../ChatPublic";
 import AlterPassword from "./AlterPassword";
-import { UserData } from "../../../InitialPage/Contexts/Contexts";
+import { UserData } from "../../../Contexts/Contexts";
 import ButtonTime from "./KickMember";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { BiMessageRoundedX } from "react-icons/bi";

@@ -2,7 +2,7 @@ import { FaEye } from "react-icons/fa";
 import React, { useContext } from "react";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { FaTableTennisPaddleBall } from "react-icons/fa6";
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 
 import { GoMute } from "react-icons/go";
 import { Players } from "./ListFriends";

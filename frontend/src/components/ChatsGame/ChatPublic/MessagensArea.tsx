@@ -1,7 +1,7 @@
 import  { useContext, useEffect, useState } from "react";
 import { ChatContext, Messages } from "./ChatPublic";
 import InputChats from "../InputChats";
-import { UserData } from '../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../Contexts/Contexts';
 import FormatMessages from "../FormatMessagens/FormatMessagens";
 import { Socket } from "socket.io-client";
 

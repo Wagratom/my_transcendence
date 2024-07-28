@@ -3,7 +3,7 @@ import { ChatContext } from "../ChatPublic";
 import Perfil from "./Perfil";
 import Rules from "./Rules";
 import Bar from "./Bar";
-import { UserData } from '../../../InitialPage/Contexts/Contexts';
+import { UserData } from '../../../Contexts/Contexts';
 import AllButtons from './AllButtons';
 
 const rules: string[] = [
