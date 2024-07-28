@@ -30,21 +30,15 @@ export type dataConvite = {
 	myNickname: string,
 }
 
-export default function Game(): JSX.Element {
 
+export default function Game(): JSX.Element {
 	let [collisionPnt, setCollisionPnt] = useState<string>('');
 	const gameContainerRef = useRef<HTMLDivElement>(null);
 	const userData = useContext(UserData).user;
 	const [openModalConvite, setOpenModalConvite] = useState<boolean>(false);
 	const [dataConvite, setDataConvite] = useState<dataConvite>({} as dataConvite);
 
-	useEffect(() => {
-		userData.socket?.on("receiveConvite", (data: dataConvite) => {
-			if (data.otherId === userData.id)
-				setOpenModalConvite(true);
-			setDataConvite(data);
-		})
-	});
+
 
 	useEffect(() => {
 		if (!gameContainerRef.current) return
