@@ -14,7 +14,8 @@ export default class UserResponseDto {
   avatar: string;
 
   constructor(user: any) {
-    this.username = user.username;
+    console.log(user)
+    this.username = user.login;
     this.nickname = user.nickname;
     this.email = user.email;
     this.avatar = user.avatar;

@@ -22,7 +22,7 @@ export class LoginService implements LoginServiceInterface {
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    return  new UserResponseDto(await this.prismaService.login(userData));
+    return  user
   }
 
   async logout(userData: UserCredentials): Promise<boolean> {
@@ -30,7 +30,7 @@ export class LoginService implements LoginServiceInterface {
   }
 
   async register(userData: RegisterUserDto): Promise<UserResponseDto> {
-    let user = this.prismaService.findUser(userData)
+    let user = await this.prismaService.findUser(userData)
     if (user) {
       throw new ConflictException('User already exist')
     }

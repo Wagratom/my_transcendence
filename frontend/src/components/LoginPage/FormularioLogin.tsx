@@ -34,12 +34,11 @@ export default function FormularioLogin(props: propsFormulario) {
 			login: formData.get('username'),
 			password: formData.get('password')
 		}
-		axios.post('http://localhost:3000/login', body)
+		axios.post('http://localhost:3000/login', body, {timeout:  5000})
 			.then((response) => {
 				if (response.status === 200) {
 					console.log('User logged in successfully')
 				}
-				console.log(response)
 			}).catch((error) => {
 				if (error.response.status === 404) {
 					invalidUser.current?.classList.add('d-block');

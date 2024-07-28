@@ -50,7 +50,7 @@ export default class LoginRepository implements LoginRepositoryInterface {
   }
 
   async register(userData: RegisterUserDto): Promise<UserResponseDto> {
-    let newUser = this.prismaService.user.create({
+    let newUser = await this.prismaService.user.create({
       data: {
         login: userData.login,
         password: userData.password,
