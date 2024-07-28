@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     LoginModule,
+    UsersModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
