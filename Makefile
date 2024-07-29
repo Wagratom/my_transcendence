@@ -12,6 +12,9 @@ env:
 up:
 	docker compose up -d
 
+build:
+	docker compose up --build -d
+
 down:
 	docker compose down
 
@@ -22,18 +25,24 @@ logs:
 	docker compose logs -f
 
 all-stop:
-	docker stop $(docker ps -q)
+	docker stop $$(docker ps -q)
 
 all-rm:
-	docker rm $(docker ps -a -q)
+	docker rm $$(docker ps -a -q)
 
 all-rmi:
-	docker rmi $(docker images -q)
+	docker rmi $$(docker images -q)
 
 all-rmv:
-	docker volume rm $(docker volume ls -q)
+	docker volume rm $$(docker volume ls -q)
 
-cleanup: all-stop all-rm all-rmi all-rmv
+show:
+	docker compose ps -a
+	docker volume ls
+	docker images
+
+prune:
+	docker system prune -a
 
 help:
 	@echo "Usage: make [target]"
@@ -50,5 +59,5 @@ help:
 	@echo "  all-rmv    Remove all volumes"
 	@echo "  cleanup    Stop all containers, remove all containers, remove all images, remove all volumes"
 
-.PHONY: env up down ps logs all-stop all-rm all-rmi all-rmv cleanup
+.PHONY: env up down ps logs all-stop all-rm all-rmi all-rmv prune
 
