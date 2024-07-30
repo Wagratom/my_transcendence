@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 type propsFormulario = {
 	handleForm: React.Dispatch<React.SetStateAction<string>>
 }
+
 export default function FormularioLogin(props: propsFormulario) {
 	// Component that renders the login form
 	// The HTML blocks are created in functions to facilitate code readability and are called within the form in the function's return
@@ -28,7 +29,7 @@ export default function FormularioLogin(props: propsFormulario) {
 
 	//TODO: Quando erra sem nada e depois corrige ele nao some o is invalid
 	// Function that checks if the user exists in the database
-	const checkUser = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const checkUser = () => {
 		let formData = new FormData(document.getElementById('form__login') as HTMLFormElement);
 		let username = formData.get('username') as string
 		let password = formData.get('password') as string

@@ -24,6 +24,7 @@ import MiniProfile from "../../Profiles/MiniProfile/MiniProfile";
 import { UserData } from "../../Contexts/Contexts";
 import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
+import ModalNotAuthorized from "./ModalNotAuthorized";
 
 export type dataConvite = {
 	otherId: string,
@@ -284,6 +285,7 @@ export default function Game(): JSX.Element {
 
 	return (
 		<div ref={gameContainerRef} style={cssGameContainer}>
+			{userData.authorized ? null : <ModalNotAuthorized />}
 			{collisionPnt === 'planetLua' ? <SettingsStore openSettingsStore={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetFire' ? <SettingsPath openSettingsPath={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetTerra' ? <MiniProfile showMiniPerfil={setCollisionPnt} /> : null}

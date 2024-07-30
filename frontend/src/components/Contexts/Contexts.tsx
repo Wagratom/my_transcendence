@@ -11,6 +11,7 @@ export type t_dataUser = {
 	twoFA: boolean;
 	socket: Socket | undefined;
 	avatar_name: string;
+	authorized: boolean;
 };
 
 export const UserData = createContext<{
@@ -20,27 +21,3 @@ export const UserData = createContext<{
 	user: {} as t_dataUser,
 	updateDataUser: () => {},
 })
-
-export const UserProvider = ({Children}: any) => {
-	const [infoUser, setGetInfoUser] = useState<t_dataUser>({} as t_dataUser);
-
-	const updateUser = () => {
-		console.log(Cookies.get('jwtToken'))
-		axios.get('http://localhost:3000/users/getProfile'
-		, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-			}
-		})
-		.then((res) => {
-			setGetInfoUser(res.data);
-		}
-		).catch(() => { })
-	}
-
-	return (
-		<UserData.Provider value={{ user: infoUser, updateDataUser: updateUser }}>
-			{Children}
-		</UserData.Provider>
-	)
-}
