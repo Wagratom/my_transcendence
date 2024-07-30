@@ -50,7 +50,7 @@ export default function Formulario(props: propsFormulario) {
 			email: email
 		}
 
-		axios.post('http://localhost:3000/login/register', body)
+		axios.post('https://localhost/api/login/register', body)
 			.then((response) => {
 				if (response.status === 201) {
 					props.handleForm('Login')

@@ -15,7 +15,6 @@ import { UsersModule } from './users/users.module';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
-    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

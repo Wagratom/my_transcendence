@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 
 type propsFormulario = {
@@ -27,7 +26,7 @@ export default function FormularioLogin(props: propsFormulario) {
 		updateClassList('password', !!password);
 	};
 
-
+	//TODO: Quando erra sem nada e depois corrige ele nao some o is invalid
 	// Function that checks if the user exists in the database
 	const checkUser = (event: React.MouseEvent<HTMLButtonElement>) => {
 		let formData = new FormData(document.getElementById('form__login') as HTMLFormElement);
@@ -38,7 +37,7 @@ export default function FormularioLogin(props: propsFormulario) {
 			login: formData.get('username'),
 			password: formData.get('password')
 		}
-		axios.post('http://localhost:3000/login', body, {timeout:  5000, withCredentials: true})
+		axios.post('https://localhost/api/login', body, {timeout:  5000, withCredentials: true})
 			.then((response) => {
 				if (response.status === 200) {
 					navigate('/game')
