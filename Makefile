@@ -10,13 +10,16 @@ env:
 
 
 up:
-	docker compose up -d
+	docker compose up
 
 build:
-	docker compose up --build -d
+	docker compose up --build
 
 down:
 	docker compose down
+
+down-v:
+	docker compose down -v
 
 ps:
 	docker compose ps
@@ -37,8 +40,16 @@ all-rmv:
 	docker volume rm $$(docker volume ls -q)
 
 show:
+	@echo "Containers:"
+	@echo "----------------"
 	docker compose ps -a
+	@echo ""
+	@echo "Volumes:"
+	@echo "----------------"
 	docker volume ls
+	@echo ""
+	@echo "Images:"
+	@echo "----------------"
 	docker images
 
 prune:
@@ -59,5 +70,5 @@ help:
 	@echo "  all-rmv    Remove all volumes"
 	@echo "  cleanup    Stop all containers, remove all containers, remove all images, remove all volumes"
 
-.PHONY: env up down ps logs all-stop all-rm all-rmi all-rmv prune
+.PHONY: env up down ps logs all-stop all-rm all-rmi all-rmv prune down-v
 
