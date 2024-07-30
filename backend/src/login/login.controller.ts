@@ -8,7 +8,7 @@ import {
 
 import { LoginService } from './login.service';
 import { LoginAuthResponseDto, LoginDefaultResponseDto } from './dto/login.response.dto';
-import { Response, Request } from 'express';
+import { Response } from 'express';
 
 @Controller('login')
 export class LoginController {
@@ -19,14 +19,14 @@ export class LoginController {
   async login(
     @Body() body: UserCredentials,
     @Res({ passthrough: true }) response: Response,
-    @Req() req: Request
   ) : Promise<LoginAuthResponseDto>
   {
     const userData = await this.service.login(body);
     response.cookie('jwt', userData.token, {
-      httpOnly: false,
+      httpOnly: true,
       secure:  process.env.NODE_ENV === 'production',
-      sameSite: 'none' // ou 'strict' conforme necessário
+      sameSite: 'none',
+      domain: 'localhost',
     });
    return userData
   }

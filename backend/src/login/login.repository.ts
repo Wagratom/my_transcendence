@@ -14,11 +14,10 @@ import { User } from '@prisma/client';
 export default class LoginRepository implements LoginRepositoryInterface {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findUser(login: string, password: string): Promise<User> {
+  async findUser(login: string): Promise<User> {
     let user = await this.prismaService.user.findUnique({
       where: {
         login: login,
-        password: password,
       },
     });
 
