@@ -3,4 +3,4 @@
 #Tentei usar ARG copiar um .env para o container mas não funcionou, então vamos fazer assim porque o importante e funcionar
 npx prisma migrate deploy
 npx prisma generate
-npm run start
+npm run start:dev
