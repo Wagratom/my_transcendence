@@ -26,6 +26,8 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+    volumes:
+      - ./backend/src:/app/src
     networks:
       - wagratom_data
 
