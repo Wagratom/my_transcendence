@@ -1,6 +1,6 @@
 import { UserData } from "../../../Contexts/Contexts";
 import React, { useContext, useState } from "react";
-import "../sideBarProfile.css";
+import "./MineProfileUser.css";
 import StatusPlayer from "../statusPlayer";
 import { CiSettings } from "react-icons/ci";
 import OptionsMiniProfile from "./OptionsMiniProfile";
@@ -11,7 +11,7 @@ type propsMiniProfile = {
 
 export default function MiniPerfilUser(props: propsMiniProfile) {
 	const { user } = useContext(UserData);
-	const [optionsConf, setOptionsConf] = useState<boolean>(true);
+	const [optionsConf, setOptionsConf] = useState<boolean>(false);
 	const [showConfigurations, setShowConfigurations] = useState<boolean>(false);
 
 	if (user.nickname === "" || user.avatar === "") {
@@ -29,8 +29,8 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 		return (
 			<OptionsMiniProfile
 				showMiniPerfil={props.showMiniPerfil}
+				showConfigurations={setShowConfigurations}
 				id={user.id}
-				setShowConfigurations={setShowConfigurations}
 			/>
 		)
 	}

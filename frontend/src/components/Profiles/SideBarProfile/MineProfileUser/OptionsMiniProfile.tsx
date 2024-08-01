@@ -7,9 +7,9 @@ import { UserData } from '../../../Contexts/Contexts';
 import { IconType } from 'react-icons';
 
 type propsSelectConfiuration = {
+	showConfigurations: React.Dispatch<React.SetStateAction<boolean>>;
 	showMiniPerfil: React.Dispatch<React.SetStateAction<string>>;
 	id: string;
-	setShowConfigurations: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function OptionsMiniProfile(props: propsSelectConfiuration): JSX.Element  {
@@ -36,8 +36,12 @@ export default function OptionsMiniProfile(props: propsSelectConfiuration): JSX.
 	}
 	return (
 		<div className='bg-light text-black p-3 rounded z-2 position-relative'>
-			{optionBlock('edit Profile', MdModeEdit)}
-			{optionBlock('Lougot', IoMdExit)}
+			<div style={{cursor: 'pointer'}} onClick={() => props.showMiniPerfil('settings')}>
+				<p><MdModeEdit className='m-1'/>edit Profile</p>
+			</div>
+			<div style={{cursor: 'pointer'}} onClick={() => props.showConfigurations(true)}>
+				<p><IoMdExit className='m-1'/>Lougot</p>
+			</div>
 		</div>
 	)
 }
