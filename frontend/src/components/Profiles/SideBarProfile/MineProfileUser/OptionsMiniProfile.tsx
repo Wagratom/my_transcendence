@@ -1,10 +1,9 @@
 import { MdModeEdit } from 'react-icons/md';
-import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdExit } from 'react-icons/io';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserData } from '../../Contexts/Contexts';
+import { UserData } from '../../../Contexts/Contexts';
 import { IconType } from 'react-icons';
 
 type propsSelectConfiuration = {

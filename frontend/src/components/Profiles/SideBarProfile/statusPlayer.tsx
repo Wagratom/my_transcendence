@@ -8,7 +8,7 @@ export default function StatusPlayer(props: propsStatusPlayer) {
 			<div style={{marginLeft: '1rem'}}>
 				<p className="fs-4">{props.nickName}</p>
 				<div className="statusPlayer">
-					<div className='statusOnlineBorder'>
+					<div className='statusBorder'>
 						<div className='statusOnlineCenter'>
 						</div>
 					</div>
@@ -16,6 +16,18 @@ export default function StatusPlayer(props: propsStatusPlayer) {
 				</div>
 			</div>
 		);
+	} else {
+		return (
+			<div style={{marginLeft: '1rem'}}>
+				<p className="fs-4">{props.nickName}</p>
+				<div className="statusPlayer">
+					<div className='statusBorder'>
+						<div className='statusOflineCenter'>
+						</div>
+					</div>
+					<p className="fs-5 me-3" >Offline</p>
+				</div>
+			</div>
+		)
 	}
-	return <div></div>
 }

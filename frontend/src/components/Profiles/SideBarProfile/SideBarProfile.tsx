@@ -1,11 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import axios from 'axios';
-import MiniPerfilUser from './MiniPerfilUser';
-import Options from './options';
-import ListFriends from './ListFriends';
-import { Players } from './ListFriends';
-import { UserData } from '../../Contexts/Contexts';
+import React from 'react';
+import MiniPerfilUser from './MineProfileUser/MiniPerfilUser';
 
 type propsMiniProfile = {
 	showMiniPerfil: React.Dispatch<React.SetStateAction<string>>;

@@ -1,3 +1,4 @@
+
 export default function RightSide(): JSX.Element {
 	return (
 		<div className="row g-0">
