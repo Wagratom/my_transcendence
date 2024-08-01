@@ -1,8 +1,8 @@
-import { IoMdArrowDropdown } from 'react-icons/io';
 import { UserData } from '../../Contexts/Contexts';
 import React, { useContext, useState } from 'react';
-import Status from './PlayersStatus';
-import ConfigurationGame from './Configurations/Configurations';
+import './sideBarProfile.css';
+import StatusPlayer from './statusPlayer';
+import { CiSettings } from 'react-icons/ci';
 import OptionsMiniProfile from './OptionsMiniProfile';
 
 type propsMiniProfile = {
@@ -11,9 +11,8 @@ type propsMiniProfile = {
 
 export default function MiniPerfilUser(props: propsMiniProfile) {
 	const userData = useContext(UserData).user;
-	const [optionsConf, setOptionsConf] = useState<boolean>(false);
+	const [optionsConf, setOptionsConf] = useState<boolean>(true);
 	const [showConfigurations, setShowConfigurations] = useState<boolean>(false);
-
 
 	if (userData.nickname === '' || userData.avatar === '') {
 		return (
@@ -24,34 +23,34 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 			</div>
 		);
 	}
+
+
 	return (
-		<div className='d-flex p-3 text-white' style={{ height: '15vh' }}>
-			{showConfigurations ? <ConfigurationGame closed={setShowConfigurations} /> : null}
-			<div className='h-100 d-flex align-items-center'>
-				<img className="rounded-circle h-100 w-100 me-3" src={userData.avatar} alt='foto' />
-				<Status
-					is_active={true}
-					name={userData.avatar_name}
-					my_id={userData.id}
-					admin={[]}
-					mute={[]}
-					match_status={''}
-					player_id={''}
-				/>
+		<div className='miniProfileUser'>
+			<div className='informationUser'>
+				<div>
+					<img className='img-thumbnail' src={userData.avatar} alt="Dinamic User" />
+				</div>
+				<StatusPlayer status={userData.status} nickName={userData.nickname} />
 			</div>
 			<div className='ms-auto'>
-				<IoMdArrowDropdown
-					className="d-flex m-auto"
+				<CiSettings
+					className='d-flex ms-auto'
 					type='button'
-					size={30}
+					size={20}
+					color='white'
 					onClick={() => setOptionsConf(!optionsConf)}
 				/>
-				{!optionsConf ? null :
+				{optionsConf
+					?
 					<OptionsMiniProfile
 						showMiniPerfil={props.showMiniPerfil}
 						id={userData.id}
 						setShowConfigurations={setShowConfigurations}
-					/>}
+					/>
+					:
+					null
+				}
 			</div>
 		</div>
 	)

@@ -12,33 +12,6 @@ type propsMiniProfile = {
 }
 
 export default function MiniProfile(props: propsMiniProfile) {
-	const [players, setPlayers] = useState<Players[]>([]);
-	const userData = useContext(UserData).user;
-
-	function getPlayers(route: string) {
-		axios.get(route, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420"
-			}
-		}).then((res) => {
-			setPlayers(res.data);
-		}).catch(() => {})
-	}
-
-	useEffect(() => {
-		getPlayers(`${process.env.REACT_APP_HOST_URL}/users/friends`);
-	}, []);
-
-	useEffect(() => {
-		userData.socket?.on('checkStatus', (data: any) => {
-			getPlayers(`${process.env.REACT_APP_HOST_URL}/users/friends`);
-		})
-		// return () => {
-		// 	socket.off('checkStatus');
-		// }
-	}, [userData.socket])
-
 	const cssMiniprfile: React.CSSProperties = {
 		display: 'flex',
 		flexDirection: 'column',
@@ -56,8 +29,8 @@ export default function MiniProfile(props: propsMiniProfile) {
 			<div className='position-absolute top-0 end-0 h-100' style={cssMiniprfile}>
 				<MiniPerfilUser showMiniPerfil={props.showMiniPerfil} />
 				<hr className='m-0 w-100 text-white'></hr>
-				<Options getPlayers={getPlayers} />
-				<ListFriends players={players} getPlayers={getPlayers} />
+				{/* <Options getPlayers={getPlayers} /> */}
+				{/* <ListFriends players={players} getPlayers={getPlayers} /> */}
 			</div>
 		</>
 	);

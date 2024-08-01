@@ -53,6 +53,7 @@ export default class LoginRepository implements LoginRepositoryInterface {
         login: userData.login,
         password: userData.password,
         email: userData.email,
+        nickname: userData.login,
       },
     });
     return new LoginDefaultResponseDto(newUser);

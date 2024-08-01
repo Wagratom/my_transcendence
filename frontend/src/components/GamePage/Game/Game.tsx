@@ -20,8 +20,8 @@ import SettingsPath from "../SettingsGame/SettingsGame";
 import Ranking from "../../Rankingpage/Ranking";
 import PageChats from "../../PublicChatsPage/PublicChats";
 import DinamicProfile from "../../Profiles/DinamicProfile/DinamicProfile";
-import MiniProfile from "../../Profiles/MiniProfile/MiniProfile";
-import { UserData } from "../../Contexts/Contexts";
+import MiniProfile from "../../Profiles/SideBarProfile/SideBarProfile";
+import { t_dataUser, UserData } from "../../Contexts/Contexts";
 import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
 import ModalNotAuthorized from "./ModalNotAuthorized";
@@ -38,8 +38,6 @@ export default function Game(): JSX.Element {
 	const userData = useContext(UserData).user;
 	const [openModalConvite, setOpenModalConvite] = useState<boolean>(false);
 	const [dataConvite, setDataConvite] = useState<dataConvite>({} as dataConvite);
-
-
 
 	useEffect(() => {
 		if (!gameContainerRef.current) return
@@ -257,14 +255,11 @@ export default function Game(): JSX.Element {
 
 		const game = new Phaser.Game(gameConfig);
 
-
-
-
 		// Limpeza quando o componente for desmontado
 		return () => {
 			game.destroy(true);
 		};
-	}, []);
+	});
 
 	const cssGameContainer: React.CSSProperties = {
 		height: '100vh !important',
@@ -282,13 +277,15 @@ export default function Game(): JSX.Element {
 		}
 	}, [userData.socket])
 
-
+	if (!userData.username) {
+		return <div>Carregando...</div>
+	}
 	return (
 		<div ref={gameContainerRef} style={cssGameContainer}>
-			{userData.authorized ? null : <ModalNotAuthorized />}
+			{!userData.authorized ? <ModalNotAuthorized /> : null}
 			{collisionPnt === 'planetLua' ? <SettingsStore openSettingsStore={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetFire' ? <SettingsPath openSettingsPath={setCollisionPnt} /> : null}
-			{collisionPnt === 'planetTerra' ? <MiniProfile showMiniPerfil={setCollisionPnt} /> : null}
+			<MiniProfile showMiniPerfil={setCollisionPnt} />
 			{collisionPnt === 'satelite' ? <PageChats openPageChats={setCollisionPnt} /> : null}
 			{collisionPnt === 'base' ? <Ranking openStore={setCollisionPnt} /> : null}
 			{collisionPnt === 'Lua' ? <DinamicProfile openDinamicProfile={setCollisionPnt}
