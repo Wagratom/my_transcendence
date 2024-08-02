@@ -1,7 +1,7 @@
 import FolderSettingsGame from "./Folder";
 import './animationEditInputName.css';
 import { IoIosClose } from "react-icons/io";
-import background from '../../../../assets/game/OIP.png'
+import backgroundConfiguration from '../../../../assets/game/backgrounds/configuration.jpg';
 type propsConfigurationGame = {
 	closed: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -12,7 +12,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 			style={{
 				backgroundColor: '#653b1e',
 				width: '60rem',
-				backgroundImage: `url(https://st4.depositphotos.com/3945545/20538/v/450/depositphotos_205384872-stock-illustration-futuristic-interface-technology-line-frame.jpg)`,
+				backgroundImage: `url(${backgroundConfiguration})`,
 				height: '40rem',
 				backgroundSize: '100% 100%',
 				overflow: 'auto',

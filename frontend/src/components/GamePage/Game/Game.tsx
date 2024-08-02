@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 
 import Phaser from "phaser";
-import background from "../../../assets/game/planets/backgrounds/bgSpace2.png";
+import background from "../../../assets/game/backgrounds/bgSpace2.png";
 
 import planetaAnel from '../../../assets/game/planets/planetaJupter.png';
 import planetaFire from '../../../assets/game/planets/planetaFire.png';
@@ -15,13 +15,14 @@ import naveFrente from '../../../assets/game/nave/naveFrente.png';
 import naveCostas from '../../../assets/game/nave/naveCostas.png';
 import naveDescendo from '../../../assets/game/nave/naveDescendo.png';
 import naveLateral from '../../../assets/game/nave/naveLateral.png';
+
 import SettingsStore from "../SettingsStore/SettingsStore";
 import SettingsPath from "../SettingsGame/SettingsGame";
 import Ranking from "../../Rankingpage/Ranking";
 import PageChats from "../../PublicChatsPage/PublicChats";
 import DinamicProfile from "../../Profiles/DinamicProfile/DinamicProfile";
 import MiniProfile from "../../Profiles/SideBarProfile/SideBarProfile";
-import { t_dataUser, UserData } from "../../Contexts/Contexts";
+import { UserData } from "../../Contexts/Contexts";
 import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
 import ModalNotAuthorized from "./ModalNotAuthorized";
@@ -38,7 +39,7 @@ export default function Game(): JSX.Element {
 	const gameContainerRef = useRef<HTMLDivElement>(null);
 	const userData = useContext(UserData).user;
 	const [openModalConvite, setOpenModalConvite] = useState<boolean>(false);
-	const [dataConvite, setDataConvite] = useState<dataConvite>({} as dataConvite);
+	const [dataConvite] = useState<dataConvite>({} as dataConvite);
 
 	useEffect(() => {
 		if (!gameContainerRef.current) return

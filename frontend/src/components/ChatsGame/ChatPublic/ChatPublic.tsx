@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { UserData } from "../../Contexts/Contexts";
-import bgChatPublic from "../../../assets/game/bgChatPublic.png";
+import bgChatPublic from "../../../assets/game/backgrounds/bgChatPublic.png";
 import RightSide from "./RightSide";
 import ModalIsBanned from "./ModalIsBanned";
 
@@ -114,7 +114,7 @@ export default function ChatPublic(props: propsPageChats) {
 	}, [dinamicProfile])
 
 	const getIsMyId = (id: String, msg: String) => {
-		if (userData.id == id)
+		if (userData.id === id)
 			setShowModal({ show: true, msg: msg });
 		getDataChat();
 	}

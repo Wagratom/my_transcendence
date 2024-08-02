@@ -1,8 +1,8 @@
 import React, { SetStateAction, useState } from "react";
 import ShowItemsStore from "./ShowItemsStore";
 import FakeApiStore from "./FakeApiStore";
-import bgLua from "../../../assets/game/planets/backgrounds/bgLua.jpg";
-import bgLua2 from "../../../assets/game/planets/backgrounds/bgLua2.jpg";
+import bgLua from "../../../assets/game/backgrounds/bgLua.jpg";
+import bgLua2 from "../../../assets/game/backgrounds/bgLua2.jpg";
 import ButtonClosed from "../Game/ButtonClosed";
 
 type propsSettingsStore = {
