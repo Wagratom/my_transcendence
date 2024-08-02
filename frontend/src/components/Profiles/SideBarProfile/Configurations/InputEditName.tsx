@@ -3,7 +3,7 @@ import { MdOutlineAddAPhoto } from "react-icons/md";
 
 export default function InputEditName(): JSX.Element {
 	return (
-		<div className='d-flex w-100 animation-div-nickname'>
+		<div className='d-flex w-100'>
 			<div className="d-flex w-50">
 				<input
 					className="remove-format-input p-0"
