@@ -14,7 +14,7 @@ export default function InicialPage() {
 			response.data.authorized = true
 			setInfoUser(response.data)
 		}).catch((error) => {
-			if (error.status === 401) {
+			if (error.response.status === 401) {
 				let user : t_dataUser = {} as t_dataUser
 				user.authorized = false
 				setInfoUser(user)
