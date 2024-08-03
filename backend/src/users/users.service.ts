@@ -20,10 +20,10 @@ export class UsersService implements UsersServiceInterface {
 			if (user) {
 				return new UsersResponseDto(user);
 			}
-			throw new NotFoundException('User not found');
+			throw new UnauthorizedException('User not found');
 		}
 		catch (e) {
-			throw new NotFoundException('Invalid token. Please login again');
+			throw new UnauthorizedException('Invalid token. Please login again');
 		}
 	}
 
