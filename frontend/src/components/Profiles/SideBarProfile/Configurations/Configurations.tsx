@@ -1,7 +1,7 @@
 import FolderSettingsGame from "./Folder";
 import './configurations.css';
 import ButtonsPainelIcons from './ButtonsPainelIcons';
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { UserData } from "../../../Contexts/Contexts";
 import UploadPhoto from "./UploadPhoto";
 import InputNickname from "./InputNickname";
@@ -14,6 +14,7 @@ type propsConfigurationGame = {
 
 export default function GameConfiguration(props: propsConfigurationGame): JSX.Element {
 	const { user } = useContext(UserData);
+	const formUpdate = useRef<HTMLFormElement>(null);
 
 	const sendForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -28,6 +29,7 @@ export default function GameConfiguration(props: propsConfigurationGame): JSX.El
 			headers: headers
 		}).then((response) => {
 			console.log(response.data);
+			formUpdate.current?.reset();
 		}).catch((error) => {
 			console.log(error);
 		});
@@ -35,7 +37,7 @@ export default function GameConfiguration(props: propsConfigurationGame): JSX.El
 	return (
 		<div className='configurationsGame'>
 			<h2 className='text-center'>configurations</h2>
-			<form method="POST" onSubmit={sendForm}>
+			<form onSubmit={sendForm} ref={formUpdate}>
 				<div className="d-flex flex-column">
 					<ButtonsPainelIcons />
 					<InputNickname />
