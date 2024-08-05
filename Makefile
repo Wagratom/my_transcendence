@@ -6,6 +6,7 @@ env:
 	@echo 'JWT_SECRET=example' >> .env
 	@echo 'NODE_ENV=production' >> .env
 	@echo 'PORT_REACT_APP=3001' >> .env
+	@echo 'PHOTO_PATH=public/photos' >> .env
 
 	@touch backend/.env
 	@echo 'DATABASE_URL=postgresql://example:example@db:5432/example' >> backend/.env

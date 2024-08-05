@@ -22,7 +22,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
       NODE_ENV: ${NODE_ENV}
-      PORT: ${PORT_REACT_APP}
+      PHOTO_PATH: ${PHOTO_PATH}
     ports:
       - "3000:3000"
     depends_on:
