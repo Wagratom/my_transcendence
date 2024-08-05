@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UsersServiceInterface } from './interface/users.service.interface';
 import { UsersResponseDto } from './dto/users.response.dto';
 import UsersRepository from './users.repository';
@@ -66,6 +66,20 @@ export class UsersService implements UsersServiceInterface {
 			update['nickname'] = nickname;
 		}
 		return await this.prismaService.updateUser(update);
+	}
+
+	async getPhoto(username: string): Promise<Buffer | void> {
+		const photoPath = path.resolve(process.env.PHOTO_PATH, username);
+		if (fs.existsSync(photoPath)) {
+			try {
+				const photoBuffer = await fs.promises.readFile(photoPath);
+				return photoBuffer;
+			} catch (err) {
+				throw new UnauthorizedException('Error opening file');
+			}
+		} else {
+			throw new NotFoundException('File does not exist');
+		}
 	}
 
 }
