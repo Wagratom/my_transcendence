@@ -50,7 +50,7 @@ export class UsersService implements UsersServiceInterface {
 			throw new UnauthorizedException('No photo found');
 		}
 		fs.writeFileSync(photoPath, photo.buffer);
-		return photoPath[0] === '/' ? `/api${photoPath}` : `/api/${photoPath}`;
+		return photoPath[0] === '/' ? `/api/users${photoPath}` : `/api/users/${photoPath}`;
 	}
 
 	async updateProfile(req: Request, nickname: string, photo: Multer.file): Promise<UsersResponseDto | void> {
