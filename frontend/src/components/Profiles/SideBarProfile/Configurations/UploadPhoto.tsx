@@ -51,13 +51,20 @@ export default function UploadPhoto({ photo }: { photo: string }): JSX.Element {
 		<div className="ms-auto">
 			<div style={centralizePhoto}>
 				<div style={borderImage}></div>
-				<img style={imageSize} src={photo} alt="Perfil do usuario que aparece dinamicamente" ref={imageProfile} />
-				<input className="d-none" type="file" ref={inputFile} onChange={alterPhoto} />
+				<img
+					id='imageProfile'
+					ref={imageProfile}
+					src={photo}
+					alt="Perfil do usuario que aparece dinamicamente"
+					style={imageSize}
+				/>
+				<input className="d-none" type="file" name='avatar' ref={inputFile} onChange={alterPhoto} />
 			</div>
 			<ButtonConfig
 				content="upload photo"
 				icon={IoCloudUploadSharp}
 				function={clickInputFile}
+				type="button"
 			/>
 		</div>
 	)

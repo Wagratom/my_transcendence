@@ -5,6 +5,7 @@ type propsButtonConfigurations = {
 	content: string;
 	icon?: IconType;
 	function?: (event: any) => void;
+	type: "button" | "submit" | "reset";
 }
 
 export default function ButtonConfig(props: propsButtonConfigurations): JSX.Element {
@@ -41,6 +42,7 @@ export default function ButtonConfig(props: propsButtonConfigurations): JSX.Elem
 			<button
 				style={cssButton}
 				onClick={(event) => {props.function && props.function(event) }}
+				type={props.type}
 			>
 				{props.icon ? <props.icon /> : null}
 				<p style={cssParagraph}>{props.content}</p>

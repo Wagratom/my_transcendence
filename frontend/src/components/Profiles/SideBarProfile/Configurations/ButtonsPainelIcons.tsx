@@ -10,18 +10,19 @@ export default function ButtonsPainelIcons(): JSX.Element {
 	const cssButton: React.CSSProperties = {
 		border: 'none',
 		borderRadius: '1rem',
-		padding: '1rem',
 		backgroundColor: 'transparent',
+		padding: '0',
+		margin: '0',
 	}
 	return (
 		<div style={cssButtonsDiv}>
 			<button style={cssButton}>
 				<TbArrowBackUp color="white" size={15}/>
 			</button>
-			<button style={cssButton}>
+			<button className="ms-5" style={cssButton}>
 				<AiOutlineSound color="white" size={15} />
 			</button>
-			<button style={cssButton}>
+			<button className="ms-5" style={cssButton}>
 				<IoMusicalNotes color="white" size={15}/>
 			</button>
 		</div>

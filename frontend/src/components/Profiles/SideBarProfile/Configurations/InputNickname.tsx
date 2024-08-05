@@ -18,8 +18,15 @@ export default function InputNickname(): JSX.Element {
 	}
 	return (
 		<div style={cssMainDiv}>
-			<label htmlFor="Username" className="form-label">Password</label>
-			<input style={cssInputNickname} type="text" className="form-control" id="Username"></input>
+			<label htmlFor="nickname" className="form-label">Password</label>
+			<input
+				id="nickname"
+				name='nickname'
+				style={cssInputNickname}
+				type="text"
+				className="form-control"
+			/>
+
 		</div>
 	)
 }
