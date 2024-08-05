@@ -27,6 +27,7 @@ import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
 import ModalNotAuthorized from "./ModalNotAuthorized";
 import ConfigurationGame from "../../Profiles/SideBarProfile/Configurations/Configurations";
+import GameConfiguration from "../../Profiles/SideBarProfile/Configurations/Configurations";
 
 export type dataConvite = {
 	otherId: string,
@@ -279,18 +280,18 @@ export default function Game(): JSX.Element {
 		}
 	}, [userData.socket])
 
-	if (!userData.username) {
+	if (!userData.authorized === undefined) {
 		return <div>Carregando...</div>
 	}
 	return (
 		<div ref={gameContainerRef} style={cssGameContainer}>
-			{!userData.authorized ? <ModalNotAuthorized /> : null}
+			{userData.authorized === false ? <ModalNotAuthorized /> : null}
 			{collisionPnt === 'planetLua' ? <SettingsStore openSettingsStore={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetFire' ? <SettingsPath openSettingsPath={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetTerra' ? <MiniProfile showMiniPerfil={setCollisionPnt} /> : null}
 			{collisionPnt === 'satelite' ? <PageChats openPageChats={setCollisionPnt} /> : null}
 			{collisionPnt === 'base' ? <Ranking openStore={setCollisionPnt} /> : null}
-			<ConfigurationGame closed={setCollisionPnt} />
+			<GameConfiguration closed={setCollisionPnt} />
 			{collisionPnt === 'Lua' ? <DinamicProfile openDinamicProfile={setCollisionPnt}
 				nickName={userData.nickname} id={userData.id} /> : null}
 			{openModalConvite ? <ModalConvite setOpenChat={setOpenModalConvite} dataConvite={dataConvite} /> : null}

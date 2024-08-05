@@ -1,36 +1,27 @@
 import FolderSettingsGame from "./Folder";
-import './animationEditInputName.css';
-import { IoIosClose } from "react-icons/io";
-import backgroundConfiguration from '../../../../assets/game/backgrounds/configuration.jpg';
+import './configurations.css';
+import ButtonsPainelIcons from './ButtonsPainelIcons';
+import { useContext } from "react";
+import { UserData } from "../../../Contexts/Contexts";
+import UploadPhoto from "./UploadPhoto";
+import InputNickname from "./InputNickname";
 type propsConfigurationGame = {
 	closed: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ConfigurationGame(props: propsConfigurationGame): JSX.Element {
+export default function GameConfiguration(props: propsConfigurationGame): JSX.Element {
+	const { user } = useContext(UserData);
+
 	return (
-		<div className='position-fixed top-50 start-50 translate-middle p-2 rounded'
-			style={{
-				backgroundColor: '#653b1e',
-				width: '60rem',
-				backgroundImage: `url(${backgroundConfiguration})`,
-				height: '40rem',
-				backgroundSize: '100% 100%',
-				overflow: 'auto',
-				backgroundRepeat: 'no-repeat'
-			}}
-		>
-			<IoIosClose
-				size={30}
-				onClick={() => props.closed('')}
-				className='position-absolute top-0 end-0 m-2 cursor-pointer'
-				type='button'
-			/>
-			<h2 className='text-center text-white'>Game Settings</h2>
-			<div className='rounded p-5'>
-				<form >
-					sdadasda
-				</form>
-			</div>
+		<div className='configurationsGame'>
+			<h2 className='text-center'>configurations</h2>
+			<form>
+				<div className="d-flex flex-column">
+					<ButtonsPainelIcons />
+					<InputNickname />
+				</div>
+				<UploadPhoto photo={user.avatar} />
+			</form>
 			<FolderSettingsGame />
 		</div>
 	)

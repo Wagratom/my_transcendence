@@ -3,8 +3,25 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+
+
+	background-image: url('../../../../assets/game/backgrounds/comfigurationsGame/bgConfiguratiosGame.jpg');
+	background-size: cover;
+	box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.5);
+
+
 	width: 60rem;
 	height: 34rem;
+	padding-top: 25px;
+	padding-left: 37px;
+	padding: 3rem 3.5rem 4rem 3.5rem;
+	color: white;
+	font-family: 'bitsSC';
+	border-radius: 3rem;
+}
+
+.configurationsGame form {
+	display: flex;
 }
 
 
