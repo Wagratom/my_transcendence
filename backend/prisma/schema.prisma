@@ -20,7 +20,7 @@ model User {
   nickname         String?      @unique
   email            String       @unique
   password         String
-  avatar           String?      @default("../assets/images/players/avatars/default.webp")
+  avatar           String?      @default("https://img.lovepik.com/bg/20231218/Stunning-Wolf-HD-Wallpaper-Art-Full-HD-1920x1080-1080p-Background_2634113_wh860.jpg!/fw/860")
   isOnline         Boolean      @default(true)
 
   createdAt        DateTime     @default(now())

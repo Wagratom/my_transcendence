@@ -20,9 +20,9 @@ export default function ModalNotAuthorized() {
             }}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Request permission to use the spaceship</Modal.Title>
+                <Modal.Title>You don't have permission to use the spaceship, or your permission has expired</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{padding: "0 !important"}}>
                 <div className='d-flex justify-content-center'>
                     <img
                         className='img-fluid'

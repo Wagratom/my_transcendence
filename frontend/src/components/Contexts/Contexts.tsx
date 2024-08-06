@@ -5,8 +5,11 @@ import { Socket } from "socket.io-client";
 
 export type t_dataUser = {
 	id: string;
+	username: string;
 	nickname: string;
 	avatar: string;
+	status: boolean;
+
 	coins: number;
 	twoFA: boolean;
 	socket: Socket | undefined;

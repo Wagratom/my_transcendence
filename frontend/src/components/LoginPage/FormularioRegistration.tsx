@@ -52,11 +52,12 @@ export default function Formulario(props: propsFormulario) {
 
 		axios.post('https://localhost/api/login/register', body)
 			.then((response) => {
+				console.log('response regoster: ', response)
 				if (response.status === 201) {
 					props.handleForm('Login')
 				}
-				console.log(response)
 			}).catch((error) => {
+				console.log('response regoster erro: ', error)
 				if (error.status === 209) {
 
 				}

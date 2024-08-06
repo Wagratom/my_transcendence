@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 
 import Phaser from "phaser";
-import background from "../../../assets/game/planets/backgrounds/bgSpace2.png";
+import background from "../../../assets/game/backgrounds/bgSpace2.png";
 
 import planetaAnel from '../../../assets/game/planets/planetaJupter.png';
 import planetaFire from '../../../assets/game/planets/planetaFire.png';
@@ -15,16 +15,18 @@ import naveFrente from '../../../assets/game/nave/naveFrente.png';
 import naveCostas from '../../../assets/game/nave/naveCostas.png';
 import naveDescendo from '../../../assets/game/nave/naveDescendo.png';
 import naveLateral from '../../../assets/game/nave/naveLateral.png';
+
 import SettingsStore from "../SettingsStore/SettingsStore";
 import SettingsPath from "../SettingsGame/SettingsGame";
 import Ranking from "../../Rankingpage/Ranking";
 import PageChats from "../../PublicChatsPage/PublicChats";
 import DinamicProfile from "../../Profiles/DinamicProfile/DinamicProfile";
-import MiniProfile from "../../Profiles/MiniProfile/MiniProfile";
+import MiniProfile from "../../Profiles/SideBarProfile/SideBarProfile";
 import { UserData } from "../../Contexts/Contexts";
 import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
 import ModalNotAuthorized from "./ModalNotAuthorized";
+import GameConfiguration from "../../Profiles/SideBarProfile/Configurations/Configurations";
 
 export type dataConvite = {
 	otherId: string,
@@ -37,13 +39,11 @@ export default function Game(): JSX.Element {
 	const gameContainerRef = useRef<HTMLDivElement>(null);
 	const userData = useContext(UserData).user;
 	const [openModalConvite, setOpenModalConvite] = useState<boolean>(false);
-	const [dataConvite, setDataConvite] = useState<dataConvite>({} as dataConvite);
-
-
+	const [dataConvite] = useState<dataConvite>({} as dataConvite);
+	let game: Phaser.Game | null;
 
 	useEffect(() => {
 		if (!gameContainerRef.current) return
-
 		class GameData extends Phaser.Scene {
 			nave: Phaser.Physics.Arcade.Sprite
 			pntAnel: Phaser.Physics.Arcade.Sprite
@@ -255,16 +255,13 @@ export default function Game(): JSX.Element {
 			}
 		};
 
-		const game = new Phaser.Game(gameConfig);
-
-
-
+		game = new Phaser.Game(gameConfig);
 
 		// Limpeza quando o componente for desmontado
 		return () => {
-			game.destroy(true);
+			game?.destroy(true);
 		};
-	}, []);
+	}, [userData]);
 
 	const cssGameContainer: React.CSSProperties = {
 		height: '100vh !important',
@@ -282,15 +279,18 @@ export default function Game(): JSX.Element {
 		}
 	}, [userData.socket])
 
-
+	if (userData.authorized === undefined) {
+		return <div>Carregando...</div>
+	}
 	return (
 		<div ref={gameContainerRef} style={cssGameContainer}>
-			{userData.authorized ? null : <ModalNotAuthorized />}
+			{userData.authorized === false ? <ModalNotAuthorized /> : null}
 			{collisionPnt === 'planetLua' ? <SettingsStore openSettingsStore={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetFire' ? <SettingsPath openSettingsPath={setCollisionPnt} /> : null}
-			{collisionPnt === 'planetTerra' ? <MiniProfile showMiniPerfil={setCollisionPnt} /> : null}
 			{collisionPnt === 'satelite' ? <PageChats openPageChats={setCollisionPnt} /> : null}
 			{collisionPnt === 'base' ? <Ranking openStore={setCollisionPnt} /> : null}
+			{collisionPnt === 'planetTerra' ? <MiniProfile handleInitialScreen={setCollisionPnt} /> : null}
+			{collisionPnt === 'configurations' ?<GameConfiguration closed={setCollisionPnt}/> : null}
 			{collisionPnt === 'Lua' ? <DinamicProfile openDinamicProfile={setCollisionPnt}
 				nickName={userData.nickname} id={userData.id} /> : null}
 			{openModalConvite ? <ModalConvite setOpenChat={setOpenModalConvite} dataConvite={dataConvite} /> : null}

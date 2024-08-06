@@ -1,7 +1,7 @@
 import ButtonModelsGame from "./ButtonModelsGame";
 import playPong from '../../../assets/settingsGame/playPong.jpg'
 import playSpecialPong from '../../../assets/settingsGame/playSpecialPong.jpg'
-import bgFire from "../../../assets/game/planets/backgrounds/bgFire.jpg";
+import bgFire from "../../../assets/game/backgrounds/bgFire.jpg";
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 

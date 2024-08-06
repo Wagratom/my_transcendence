@@ -22,6 +22,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
       NODE_ENV: ${NODE_ENV}
+      PHOTO_PATH: ${PHOTO_PATH}
     ports:
       - "3000:3000"
     depends_on:
@@ -36,7 +37,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     environment:
-      PORT: 3001
+      PORT: ${PORT_REACT_APP}
     ports:
       - "3001:3001"
     volumes:

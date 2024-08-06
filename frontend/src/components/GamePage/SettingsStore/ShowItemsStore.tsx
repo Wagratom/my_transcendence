@@ -3,7 +3,7 @@ import Coins from '../Coins'
 import ButtonsItemsStore from './ButtonItemsStore'
 import { StoreItems } from './FakeApiStore'
 
-import bgLua from "../../../assets/game/planets/backgrounds/bgLua.jpg";
+import bgLua from "../../../assets/game/backgrounds/bgLua.jpg";
 
 export default function ShowItemsStore({items}: {items: StoreItems}): JSX.Element {
 	const cssbgLua: React.CSSProperties = {
@@ -21,12 +21,6 @@ export default function ShowItemsStore({items}: {items: StoreItems}): JSX.Elemen
 		flexDirection: 'column',
 	}
 
-	const cssCoins: React.CSSProperties = {
-		position: 'absolute',
-		top: '0',
-		right: '0',
-		zIndex: 3,
-	}
 
 	return (
 		<div style={cssDivFilhoSelectGame}>

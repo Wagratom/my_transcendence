@@ -1,5 +1,5 @@
 import React, { SetStateAction, useContext, useEffect, useState } from 'react';
-import bgChats from '../../assets/game/planets/backgrounds/bgChats.jpg'
+import bgChats from '../../assets/game/backgrounds/bgChats.jpg'
 import ScreenCreateNewChat from './ScreemCreateNewChat';
 import BarOptions from './BarOptions';
 import ChatList from './ChatsList';
