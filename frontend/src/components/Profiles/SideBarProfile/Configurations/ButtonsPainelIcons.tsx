@@ -2,7 +2,12 @@ import { AiOutlineSound } from "react-icons/ai";
 import { IoMusicalNotes } from "react-icons/io5";
 import { TbArrowBackUp } from "react-icons/tb";
 
-export default function ButtonsPainelIcons(): JSX.Element {
+
+type propsConfigurationGame = {
+	closed: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function ButtonsPainelIcons(props: propsConfigurationGame): JSX.Element {
 	const cssButtonsDiv: React.CSSProperties = {
 		display: 'flex',
 	}
@@ -17,7 +22,7 @@ export default function ButtonsPainelIcons(): JSX.Element {
 	return (
 		<div style={cssButtonsDiv}>
 			<button style={cssButton}>
-				<TbArrowBackUp color="white" size={15}/>
+				<TbArrowBackUp color="white" size={15} onClick={() => props.closed('')}/>
 			</button>
 			<button className="ms-5" style={cssButton}>
 				<AiOutlineSound color="white" size={15} />

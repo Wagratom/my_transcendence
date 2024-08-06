@@ -39,7 +39,7 @@ export default function GameConfiguration(props: propsConfigurationGame): JSX.El
 			<h2 className='text-center'>configurations</h2>
 			<form onSubmit={sendForm} ref={formUpdate}>
 				<div className="d-flex flex-column">
-					<ButtonsPainelIcons />
+					<ButtonsPainelIcons closed={props.closed}/>
 					<InputNickname />
 				</div>
 				<UploadPhoto photo={user.avatar} />

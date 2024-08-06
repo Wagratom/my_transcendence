@@ -26,7 +26,6 @@ import { UserData } from "../../Contexts/Contexts";
 import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
 import ModalNotAuthorized from "./ModalNotAuthorized";
-import ConfigurationGame from "../../Profiles/SideBarProfile/Configurations/Configurations";
 import GameConfiguration from "../../Profiles/SideBarProfile/Configurations/Configurations";
 
 export type dataConvite = {
@@ -41,10 +40,10 @@ export default function Game(): JSX.Element {
 	const userData = useContext(UserData).user;
 	const [openModalConvite, setOpenModalConvite] = useState<boolean>(false);
 	const [dataConvite] = useState<dataConvite>({} as dataConvite);
+	let game: Phaser.Game | null;
 
 	useEffect(() => {
 		if (!gameContainerRef.current) return
-
 		class GameData extends Phaser.Scene {
 			nave: Phaser.Physics.Arcade.Sprite
 			pntAnel: Phaser.Physics.Arcade.Sprite
@@ -256,13 +255,13 @@ export default function Game(): JSX.Element {
 			}
 		};
 
-		const game = new Phaser.Game(gameConfig);
+		game = new Phaser.Game(gameConfig);
 
 		// Limpeza quando o componente for desmontado
 		return () => {
-			game.destroy(true);
+			game?.destroy(true);
 		};
-	});
+	}, [userData]);
 
 	const cssGameContainer: React.CSSProperties = {
 		height: '100vh !important',
@@ -280,7 +279,7 @@ export default function Game(): JSX.Element {
 		}
 	}, [userData.socket])
 
-	if (!userData.authorized === undefined) {
+	if (userData.authorized === undefined) {
 		return <div>Carregando...</div>
 	}
 	return (
@@ -288,10 +287,10 @@ export default function Game(): JSX.Element {
 			{userData.authorized === false ? <ModalNotAuthorized /> : null}
 			{collisionPnt === 'planetLua' ? <SettingsStore openSettingsStore={setCollisionPnt} /> : null}
 			{collisionPnt === 'planetFire' ? <SettingsPath openSettingsPath={setCollisionPnt} /> : null}
-			{collisionPnt === 'planetTerra' ? <MiniProfile showMiniPerfil={setCollisionPnt} /> : null}
 			{collisionPnt === 'satelite' ? <PageChats openPageChats={setCollisionPnt} /> : null}
 			{collisionPnt === 'base' ? <Ranking openStore={setCollisionPnt} /> : null}
-			<GameConfiguration closed={setCollisionPnt} />
+			{collisionPnt === 'planetTerra' ? <MiniProfile handleInitialScreen={setCollisionPnt} /> : null}
+			{collisionPnt === 'configurations' ?<GameConfiguration closed={setCollisionPnt}/> : null}
 			{collisionPnt === 'Lua' ? <DinamicProfile openDinamicProfile={setCollisionPnt}
 				nickName={userData.nickname} id={userData.id} /> : null}
 			{openModalConvite ? <ModalConvite setOpenChat={setOpenModalConvite} dataConvite={dataConvite} /> : null}

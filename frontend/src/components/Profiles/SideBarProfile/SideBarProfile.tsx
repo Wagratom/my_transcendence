@@ -2,7 +2,7 @@ import React from 'react';
 import MiniPerfilUser from './MineProfileUser/MiniPerfilUser';
 
 type propsMiniProfile = {
-	showMiniPerfil: React.Dispatch<React.SetStateAction<string>>;
+	handleInitialScreen: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MiniProfile(props: propsMiniProfile) {
@@ -21,7 +21,7 @@ export default function MiniProfile(props: propsMiniProfile) {
 	return (
 		<>
 			<div className='position-absolute top-0 end-0 h-100' style={cssMiniprfile}>
-				<MiniPerfilUser showMiniPerfil={props.showMiniPerfil} />
+				<MiniPerfilUser handleInitialScreen={props.handleInitialScreen} />
 				<hr className='m-0 w-100 text-white'></hr>
 				{/* <Options getPlayers={getPlayers} /> */}
 				{/* <ListFriends players={players} getPlayers={getPlayers} /> */}

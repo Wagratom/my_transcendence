@@ -6,13 +6,12 @@ import { CiSettings } from "react-icons/ci";
 import OptionsMiniProfile from "./OptionsMiniProfile";
 
 type propsMiniProfile = {
-	showMiniPerfil: React.Dispatch<React.SetStateAction<string>>;
+	handleInitialScreen: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function MiniPerfilUser(props: propsMiniProfile) {
 	const { user } = useContext(UserData);
 	const [optionsConf, setOptionsConf] = useState<boolean>(false);
-	const [showConfigurations, setShowConfigurations] = useState<boolean>(false);
 
 	if (user.nickname === "" || user.avatar === "") {
 		return (
@@ -28,8 +27,7 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 		if (!optionsConf) return null
 		return (
 			<OptionsMiniProfile
-				showMiniPerfil={props.showMiniPerfil}
-				showConfigurations={setShowConfigurations}
+				handleInitialScreen={props.handleInitialScreen}
 				id={user.id}
 			/>
 		)
