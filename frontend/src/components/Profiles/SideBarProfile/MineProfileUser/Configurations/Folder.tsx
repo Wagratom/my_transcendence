@@ -2,7 +2,7 @@ import { IoLogoInstagram } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
 import ButtonConfig from "./ButtonConfig";
 import { AiOutlineLinkedin } from "react-icons/ai";
-import { UserData } from "../../../Contexts/Contexts";
+import { UserData } from "../../../../Contexts/Contexts";
 import { useContext } from "react";
 
 export default function FolderSettingsGame(): JSX.Element {

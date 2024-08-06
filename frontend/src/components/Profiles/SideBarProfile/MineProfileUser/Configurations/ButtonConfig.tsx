@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import backgroundButton from '../../../../assets/game/backgrounds/comfigurationsGame/bgButtonConfigurations.png';
+import backgroundButton from '../../../../../assets/game/backgrounds/comfigurationsGame/bgButtonConfigurations.png';
 
 type propsButtonConfigurations = {
 	content: string;

@@ -5,7 +5,7 @@ type propsStatusPlayer = {
 export default function StatusPlayer(props: propsStatusPlayer) {
 	if (props.status) {
 		return (
-			<div style={{marginLeft: '1rem'}}>
+			<div style={{ marginLeft: '1rem' }}>
 				<p className="fs-4">{props.nickName}</p>
 				<div className="statusPlayer">
 					<div className='statusBorder'>
@@ -18,7 +18,7 @@ export default function StatusPlayer(props: propsStatusPlayer) {
 		);
 	} else {
 		return (
-			<div style={{marginLeft: '1rem'}}>
+			<div style={{ marginLeft: '1rem' }}>
 				<p className="fs-4">{props.nickName}</p>
 				<div className="statusPlayer">
 					<div className='statusBorder'>

@@ -1,4 +1,4 @@
-import backgroundNickname from '../../../../assets/game/backgrounds/comfigurationsGame/bgInputNickname.png';
+import backgroundNickname from '../../../../../assets/game/backgrounds/comfigurationsGame/bgInputNickname.png';
 
 export default function InputNickname(): JSX.Element {
 	const cssInputNickname: React.CSSProperties = {

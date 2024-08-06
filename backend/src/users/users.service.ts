@@ -45,10 +45,11 @@ export class UsersService implements UsersServiceInterface {
 	}
 
 	async uploadPhoto(photo: Multer.File, username: string): Promise<string> {
-		const photoPath = path.resolve(process.env.PHOTO_PATH, username);
 		if (!photo) {
 			throw new UnauthorizedException('No photo found');
 		}
+		let photoName = photo.originalname.split('.')[0];
+		const photoPath = path.resolve(process.env.PHOTO_PATH, `${photoName}${username}`);
 		fs.writeFileSync(photoPath, photo.buffer);
 		return photoPath[0] === '/' ? `/api/users${photoPath}` : `/api/users/${photoPath}`;
 	}

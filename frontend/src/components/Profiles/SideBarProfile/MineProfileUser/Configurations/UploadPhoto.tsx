@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import { IoCloudUploadSharp } from "react-icons/io5";
 import ButtonConfig from "./ButtonConfig";
-import bordaImage from '../../../../assets/game/backgrounds/comfigurationsGame/bgPhotoConfigurations.png'
+import bordaImage from '../../../../../assets/game/backgrounds/comfigurationsGame/bgPhotoConfigurations.png'
 
 export default function UploadPhoto({ photo }: { photo: string }): JSX.Element {
 	const inputFile = useRef<HTMLInputElement>(null);

@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function InicialPage() {
 	// Function called to load the context with user information before rendering the game page
 	const [infoUser, setInfoUser] = useState<t_dataUser>({} as t_dataUser);
-	useEffect(() => {
+	const updateUser = () => {
 		axios.get('https://localhost/api/users/getProfile', {
 			timeout: 5000,
 			withCredentials: true
@@ -20,10 +20,13 @@ export default function InicialPage() {
 				setInfoUser(user)
 			}
 		})
+	}
+	useEffect(() => {
+		updateUser()
 	}, []);
 	return (
 		<>
-			<UserData.Provider value={{ user: infoUser, updateDataUser: () => { } }}>
+			<UserData.Provider value={{ user: infoUser, updateDataUser: updateUser}}>
 				<Outlet />
 			</UserData.Provider>
 		</>

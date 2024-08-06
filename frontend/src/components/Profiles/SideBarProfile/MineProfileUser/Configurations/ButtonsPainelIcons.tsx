@@ -4,7 +4,7 @@ import { TbArrowBackUp } from "react-icons/tb";
 
 
 type propsConfigurationGame = {
-	closed: React.Dispatch<React.SetStateAction<string>>;
+	openConfigurations: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ButtonsPainelIcons(props: propsConfigurationGame): JSX.Element {
@@ -22,7 +22,7 @@ export default function ButtonsPainelIcons(props: propsConfigurationGame): JSX.E
 	return (
 		<div style={cssButtonsDiv}>
 			<button style={cssButton}>
-				<TbArrowBackUp color="white" size={15} onClick={() => props.closed('')}/>
+				<TbArrowBackUp color="white" size={15} onClick={() => props.openConfigurations(false)}/>
 			</button>
 			<button className="ms-5" style={cssButton}>
 				<AiOutlineSound color="white" size={15} />

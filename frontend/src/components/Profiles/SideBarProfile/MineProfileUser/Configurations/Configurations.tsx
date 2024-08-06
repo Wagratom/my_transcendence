@@ -2,18 +2,18 @@ import FolderSettingsGame from "./Folder";
 import './configurations.css';
 import ButtonsPainelIcons from './ButtonsPainelIcons';
 import { useContext, useRef } from "react";
-import { UserData } from "../../../Contexts/Contexts";
+import { UserData } from "../../../../Contexts/Contexts";
 import UploadPhoto from "./UploadPhoto";
 import InputNickname from "./InputNickname";
 import axios from "axios";
 
 
 type propsConfigurationGame = {
-	closed: React.Dispatch<React.SetStateAction<string>>;
+	openConfigurations: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function GameConfiguration(props: propsConfigurationGame): JSX.Element {
-	const { user } = useContext(UserData);
+	const { user, updateDataUser } = useContext(UserData);
 	const formUpdate = useRef<HTMLFormElement>(null);
 
 	const sendForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,8 +28,7 @@ export default function GameConfiguration(props: propsConfigurationGame): JSX.El
 		axios.post('https://localhost/api/users/updateProfile', formData, {
 			headers: headers
 		}).then((response) => {
-			console.log(response.data);
-			formUpdate.current?.reset();
+			updateDataUser()
 		}).catch((error) => {
 			console.log(error);
 		});
@@ -39,7 +38,7 @@ export default function GameConfiguration(props: propsConfigurationGame): JSX.El
 			<h2 className='text-center'>configurations</h2>
 			<form onSubmit={sendForm} ref={formUpdate}>
 				<div className="d-flex flex-column">
-					<ButtonsPainelIcons closed={props.closed}/>
+					<ButtonsPainelIcons openConfigurations={props.openConfigurations}/>
 					<InputNickname />
 				</div>
 				<UploadPhoto photo={user.avatar} />

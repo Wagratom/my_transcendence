@@ -1,9 +1,10 @@
 import { UserData } from "../../../Contexts/Contexts";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./MineProfileUser.css";
 import StatusPlayer from "../statusPlayer";
 import { CiSettings } from "react-icons/ci";
 import OptionsMiniProfile from "./OptionsMiniProfile";
+import GameConfiguration from "./Configurations/Configurations";
 
 type propsMiniProfile = {
 	handleInitialScreen: React.Dispatch<React.SetStateAction<string>>;
@@ -12,7 +13,9 @@ type propsMiniProfile = {
 export default function MiniPerfilUser(props: propsMiniProfile) {
 	const { user } = useContext(UserData);
 	const [optionsConf, setOptionsConf] = useState<boolean>(false);
+	const [openConfigurations, setOpenConfigurations] = useState<boolean>(false)
 
+	console.log(user);
 	if (user.nickname === "" || user.avatar === "") {
 		return (
 			<div className="d-flex p-3" style={{ height: "15vh" }}>
@@ -27,30 +30,22 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 		if (!optionsConf) return null
 		return (
 			<OptionsMiniProfile
-				handleInitialScreen={props.handleInitialScreen}
+				openConfigurations={setOpenConfigurations}
+				closedMineProfile={props.handleInitialScreen}
 				id={user.id}
 			/>
 		)
 	}
 
-	const getProfilePhoto = () => {
-		return (
-			<div>
-				<img
-					className="img-thumbnail"
-					src={user.avatar}
-					alt="Dinamic User"
-				/>
-			</div>
-		)
-	}
 	return (
 		<div className="miniProfileUser">
-			<div className="informationUser">
-				{getProfilePhoto()}
+			<div className="informationUser" id="userStatus">
+				<div>
+					<img className="img-thumbnail" src={user.avatar} alt="Dinamic User"/>
+				</div>
 				<StatusPlayer status={user.status} nickName={user.nickname} />
 			</div>
-			<div className="ms-auto">
+			<div className="ms-auto" id="settingsUser">
 				<CiSettings
 					className="d-flex ms-auto"
 					type="button"
@@ -60,6 +55,7 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 				/>
 				{showConfigurationsProfile()}
 			</div>
+			{openConfigurations && <GameConfiguration openConfigurations={setOpenConfigurations}/>}
 		</div>
 	);
 }

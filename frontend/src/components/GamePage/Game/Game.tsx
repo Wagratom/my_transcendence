@@ -26,7 +26,6 @@ import { UserData } from "../../Contexts/Contexts";
 import { ModalConvite } from "./ModalConvite";
 import { useNavigate } from "react-router-dom";
 import ModalNotAuthorized from "./ModalNotAuthorized";
-import GameConfiguration from "../../Profiles/SideBarProfile/Configurations/Configurations";
 
 export type dataConvite = {
 	otherId: string,
@@ -36,14 +35,15 @@ export type dataConvite = {
 
 export default function Game(): JSX.Element {
 	let [collisionPnt, setCollisionPnt] = useState<string>('');
-	const gameContainerRef = useRef<HTMLDivElement>(null);
 	const userData = useContext(UserData).user;
 	const [openModalConvite, setOpenModalConvite] = useState<boolean>(false);
 	const [dataConvite] = useState<dataConvite>({} as dataConvite);
-	let game: Phaser.Game | null;
+	const [game, setGame] = useState<Phaser.Game>();
 
 	useEffect(() => {
-		if (!gameContainerRef.current) return
+		if (game?.canvas) return
+		if (userData.authorized === undefined) return
+
 		class GameData extends Phaser.Scene {
 			nave: Phaser.Physics.Arcade.Sprite
 			pntAnel: Phaser.Physics.Arcade.Sprite
@@ -255,9 +255,8 @@ export default function Game(): JSX.Element {
 			}
 		};
 
-		game = new Phaser.Game(gameConfig);
+		setGame(new Phaser.Game(gameConfig))
 
-		// Limpeza quando o componente for desmontado
 		return () => {
 			game?.destroy(true);
 		};
@@ -268,32 +267,19 @@ export default function Game(): JSX.Element {
 		width: '100vw !important',
 	}
 
-	//Ativando o scoket para iniciar uma partipa
-	const navigate = useNavigate()
-	useEffect(() => {
-		userData.socket?.on('startGame', (data: any) => {
-			navigate(`/game/pong/${data.roomID}`)
-		})
-		return () => {
-			userData.socket?.off('starGame')
-		}
-	}, [userData.socket])
-
 	if (userData.authorized === undefined) {
 		return <div>Carregando...</div>
 	}
 	return (
-		<div ref={gameContainerRef} style={cssGameContainer}>
-			{userData.authorized === false ? <ModalNotAuthorized /> : null}
-			{collisionPnt === 'planetLua' ? <SettingsStore openSettingsStore={setCollisionPnt} /> : null}
-			{collisionPnt === 'planetFire' ? <SettingsPath openSettingsPath={setCollisionPnt} /> : null}
-			{collisionPnt === 'satelite' ? <PageChats openPageChats={setCollisionPnt} /> : null}
-			{collisionPnt === 'base' ? <Ranking openStore={setCollisionPnt} /> : null}
-			{collisionPnt === 'planetTerra' ? <MiniProfile handleInitialScreen={setCollisionPnt} /> : null}
-			{collisionPnt === 'configurations' ?<GameConfiguration closed={setCollisionPnt}/> : null}
-			{collisionPnt === 'Lua' ? <DinamicProfile openDinamicProfile={setCollisionPnt}
-				nickName={userData.nickname} id={userData.id} /> : null}
-			{openModalConvite ? <ModalConvite setOpenChat={setOpenModalConvite} dataConvite={dataConvite} /> : null}
+		<div style={cssGameContainer}>
+			{userData.authorized === false && <ModalNotAuthorized />}
+			{openModalConvite && <ModalConvite setOpenChat={setOpenModalConvite} dataConvite={dataConvite} />}
+			{collisionPnt === 'planetLua' && <SettingsStore openSettingsStore={setCollisionPnt} />}
+			{collisionPnt === 'planetFire' && <SettingsPath openSettingsPath={setCollisionPnt} />}
+			{collisionPnt === 'satelite' && <PageChats openPageChats={setCollisionPnt} />}
+			{collisionPnt === 'base' && <Ranking openStore={setCollisionPnt} />}
+			{collisionPnt === 'planetTerra' && <MiniProfile handleInitialScreen={setCollisionPnt} />}
+			{collisionPnt === 'Lua' && <DinamicProfile openDinamicProfile={setCollisionPnt} nickName={userData.nickname} id={userData.id} />}
 		</div>
 	)
 }

@@ -5,7 +5,7 @@
 	transform: translate(-50%, -50%);
 
 
-	background-image: url('../../../../assets/game/backgrounds/comfigurationsGame/bgConfiguratiosGame.jpg');
+	background-image: url('../../../../../assets/game/backgrounds/comfigurationsGame/bgConfiguratiosGame.jpg');
 	background-size: cover;
 	box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.5);
 
