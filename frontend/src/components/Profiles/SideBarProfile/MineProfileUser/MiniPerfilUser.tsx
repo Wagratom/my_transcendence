@@ -15,7 +15,6 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 	const [optionsConf, setOptionsConf] = useState<boolean>(false);
 	const [openConfigurations, setOpenConfigurations] = useState<boolean>(false)
 
-	console.log(user);
 	if (user.nickname === "" || user.avatar === "") {
 		return (
 			<div className="d-flex p-3" style={{ height: "15vh" }}>
