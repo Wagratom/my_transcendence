@@ -4,6 +4,9 @@ import { FaUserFriends } from 'react-icons/fa';
 import { MdPersonRemoveAlt1, MdPersonAddAlt1 } from "react-icons/md";
 import { MdBlock } from "react-icons/md";
 import { useState } from "react";
+import AddFriend from "./AddFriend";
+import DeleteFriend from "./DeleteFriend";
+import BlockFriend from "./BlockFriend";
 
 
 function Options() {
@@ -18,7 +21,6 @@ function Options() {
 		fontSize: '1.5rem',
 		fontWeight: 'bold',
 	}
-
 
 	return (
 		<div className='p-2 text-white'>
@@ -71,9 +73,9 @@ function Options() {
 					/>
 				</div>
 			</div>
-			{inputAddFriend ? returnInput(addNewFriend) : null}}
-			{inputDLTFriend ? returnInput(DeleteFriend) : null}}
-			{inputBLOCKFriend ? returnInput(BlockUser) : null}}
+			{inputAddFriend ? <AddFriend /> : null}
+			{inputDLTFriend ?  <DeleteFriend />: null}
+			{inputBLOCKFriend ? <BlockFriend /> : null}
 		</div>
 	)
 }

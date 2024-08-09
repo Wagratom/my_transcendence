@@ -1,6 +1,6 @@
 import React from 'react';
 import MiniPerfilUser from './MineProfileUser/MiniPerfilUser';
-import Options from './options';
+import Options from './SideBarOptions/Options';
 import backgroundSideBar from '../../../assets/game/backgrounds/sideBar/bgPntTerra.jpg';
 
 type propsMiniProfile = {
