@@ -3,91 +3,77 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { FaUserFriends } from 'react-icons/fa';
 import { MdPersonRemoveAlt1, MdPersonAddAlt1 } from "react-icons/md";
 import { MdBlock } from "react-icons/md";
-
-import React, { useContext, useState } from 'react';
-import { UserData } from "../../Contexts/Contexts";
-
-const URLS_MiniPerfilPlayers = {
-	'personal': `${process.env.REACT_APP_HOST_URL}/users/friends`,
-	'Global': `${process.env.REACT_APP_HOST_URL}/users/find-all`,
-}
-
-function Options({ getPlayers }: { getPlayers: (route: string) => void }) {
-	const [showADDFriend, setShowAddFriend] = useState(false);
-	const [showDLTFriend, setShowDLTFriend] = useState(false);
-	const [showBLOKFriend, setShowBLOKFriend] = useState(false);
-	//todo criar um componente botão pra nao precisar ficar criando varios use stage
+import { useState } from "react";
 
 
+function Options() {
+	//Function that shows and handle with social options in the sidebar
 
-	function returnInput(func: (event: React.KeyboardEvent<HTMLInputElement>) => void) {
-		return (
-			<div className='rounded'>
-				<input
-					type='text'
-					className='remove-format-input'
-					placeholder='Search Friend'
-					onKeyDown={func}
-				/>
-			</div>
-		)
+	const [inputAddFriend, setInputAddFriend] = useState(false);
+	const [inputDLTFriend, setInputDLTFriend] = useState(false);
+	const [inputBLOCKFriend, setInputBLOCKFriend] = useState(false);
+
+	const socialCss: React.CSSProperties = {
+		fontFamily: 'bitsSC',
+		fontSize: '1.5rem',
+		fontWeight: 'bold',
 	}
 
-	const styleButton: React.CSSProperties = {
-		margin: '5px',
-		cursor: 'pointer',
-	}
+
 	return (
-		<div className='p-2'>
-			<div className='d-flex align-items-center text-white'>
-				<p className='fw-bold'>Social</p>
-				<div className='d-flex justify-content-end w-100 options'>
-					{/* TODO: ADDED Function to delete friend */}
+		<div className='p-2 text-white'>
+			<div className='d-flex align-items-center'>
+				<p style={socialCss}>Social</p>
+				<div className='d-flex justify-content-end align-items-center w-100 options'>
 					<MdBlock
-						style={styleButton}
+						className="me-2"
+						type="button"
 						size={30}
 						onClick={
 							() => {
-								setShowAddFriend(false)
-								setShowDLTFriend(false)
-								setShowBLOKFriend(!showBLOKFriend)
+								setInputAddFriend(false)
+								setInputDLTFriend(false)
+								setInputBLOCKFriend(!inputBLOCKFriend)
 							}
 						}
 					/>
 					<MdPersonRemoveAlt1
-						style={styleButton}
+						className="me-2"
+						type="button"
 						size={30}
 						onClick={() => {
-							setShowBLOKFriend(false)
-							setShowAddFriend(false)
-							setShowDLTFriend(!showDLTFriend)
+							setInputBLOCKFriend(false)
+							setInputAddFriend(false)
+							setInputDLTFriend(!inputDLTFriend)
 						}}
 					/>
 					<MdPersonAddAlt1
-						style={styleButton}
+						className="me-2"
+						type="button"
 						size={30}
 						onClick={
 							() => {
-								setShowBLOKFriend(false)
-								setShowDLTFriend(false)
-								setShowAddFriend(!showADDFriend)
+								setInputBLOCKFriend(false)
+								setInputDLTFriend(false)
+								setInputAddFriend(!inputAddFriend)
 							}
 						}
 					/>
 					<FaUserFriends
-						style={styleButton}
-						size={30} onClick={() => getPlayers(URLS_MiniPerfilPlayers.personal)}
+						className="me-2"
+						type="button"
+						size={30}
+						onClick={() => { }}
 					/>
 					<FaPeopleGroup
-						style={styleButton}
-						size={30} onClick={() => getPlayers(URLS_MiniPerfilPlayers.Global)}
+						className="me-2"
+						type="button" size={30} onClick={() => { }}
 					/>
-
 				</div>
 			</div>
-			{/* {showADDFriend ? returnInput(addNewFriend) : null} */}
-			{/* {showDLTFriend ? returnInput(DeleteFriend) : null} */}
-			{/* {showBLOKFriend ? returnInput(BlockUser) : null} */}
+			{inputAddFriend ? returnInput(addNewFriend) : null}}
+			{inputDLTFriend ? returnInput(DeleteFriend) : null}}
+			{inputBLOCKFriend ? returnInput(BlockUser) : null}}
 		</div>
 	)
 }

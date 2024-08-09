@@ -1,5 +1,7 @@
 import React from 'react';
 import MiniPerfilUser from './MineProfileUser/MiniPerfilUser';
+import Options from './options';
+import backgroundSideBar from '../../../assets/game/backgrounds/sideBar/bgPntTerra.jpg';
 
 type propsMiniProfile = {
 	handleInitialScreen: React.Dispatch<React.SetStateAction<string>>;
@@ -10,12 +12,13 @@ export default function MiniProfile(props: propsMiniProfile) {
 		display: 'flex',
 		flexDirection: 'column',
 
-		backgroundImage: `url('https://s0.smartresize.com/wallpaper/400/885/HD-wallpaper-8-bit-moonlight-8bit-arcade-blue-cloud-moon-pixel.jpg')`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'center',
+		backgroundImage: `url(${backgroundSideBar})`,
+		backgroundSize: '100% 100%',
+		backgroundPosition: 'left',
 
-		height: '100% !important',
-		width: '25vw',
+		height: '100% ',
+		width: '30rem',
+		padding: '1.5rem 1rem',
 	}
 
 	return (
@@ -23,7 +26,7 @@ export default function MiniProfile(props: propsMiniProfile) {
 			<div className='position-absolute top-0 end-0 h-100' style={cssMiniprfile}>
 				<MiniPerfilUser handleInitialScreen={props.handleInitialScreen} />
 				<hr className='m-0 w-100 text-white'></hr>
-				{/* <Options getPlayers={getPlayers} /> */}
+				<Options/>
 				{/* <ListFriends players={players} getPlayers={getPlayers} /> */}
 			</div>
 		</>
