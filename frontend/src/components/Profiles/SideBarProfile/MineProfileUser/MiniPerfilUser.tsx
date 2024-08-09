@@ -1,6 +1,5 @@
 import { UserData } from "../../../Contexts/Contexts";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import "./MineProfileUser.css";
+import React, { useContext, useState } from "react";
 import StatusPlayer from "../statusPlayer";
 import { CiSettings } from "react-icons/ci";
 import OptionsMiniProfile from "./OptionsMiniProfile";
@@ -36,11 +35,33 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 		)
 	}
 
+	const cssMainDiv: React.CSSProperties = {
+		display: 'flex',
+		padding: '1rem',
+		color: 'white',
+	}
+
+
+	const cssDivInfoProfile: React.CSSProperties = {
+		display: 'flex',
+		alignItems: 'center',
+	}
+
+	const cssPhotoProfile: React.CSSProperties = {
+		height: '8rem',
+		width: '8rem',
+		borderRadius: '50%',
+	}
+
 	return (
-		<div className="miniProfileUser">
-			<div className="informationUser" id="userStatus">
+		<div style={cssMainDiv}>
+			<div style={cssDivInfoProfile} id="userStatus">
 				<div>
-					<img className="img-thumbnail" src={user.avatar} alt="Dinamic User"/>
+					<img
+						src={user.avatar}
+						alt="Dinamic User"
+						style={cssPhotoProfile}
+						/>
 				</div>
 				<StatusPlayer status={user.status} nickName={user.nickname} />
 			</div>
