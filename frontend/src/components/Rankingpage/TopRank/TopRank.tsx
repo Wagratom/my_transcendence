@@ -1,6 +1,5 @@
 import axios from "axios"
-import Cookies from "js-cookie"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import AvatarAndUser from "./AvatarAndUser"
 import Score from "./Score"
 
@@ -21,28 +20,12 @@ export type typeRaking = {
 export default function TopRank() {
 	const [ranking, setRanking] = useState<typeRaking[]>([])
 
-	function getRanking() {
-		axios.get(`${process.env.REACT_APP_HOST_URL}/users/ladder`, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420"
-			}, timeout: 5000
-		}).then((res) => {
-			setRanking(res.data)
-		}).catch(() => {})
-	}
-	useEffect(() => {
-		getRanking()
-	}, [])
 
 	let itemsCenter = "row g-0 h-100 d-flex align-items-center justify-content-center"
 
 	const cssDivRanking: React.CSSProperties = {
-		// backgroundColor: '#7cdedb',
 		backgroundColor: '#684640',
-		// backgroundColor: 'transparent',
 		height: '4rem',
-		// 4c264b
 	}
 	return (
 		<>

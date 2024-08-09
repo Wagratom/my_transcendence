@@ -6,7 +6,6 @@ import { UserData } from "../../../Contexts/Contexts";
 type KickMemberProps = {
 	Icon: IconType;
 	content: string;
-	getUserId:  (nickname: string) => Promise<string>;
 	my_id: string;
 	chat_name: string;
 	chat_id: string;
@@ -18,21 +17,6 @@ export default function ButtonTime(props: KickMemberProps): JSX.Element {
 	const [showInput, setShowInput] = useState<boolean>(false);
 	const kickHour = useRef<HTMLInputElement>(null);
 	const kickDay = useRef<HTMLInputElement>(null);
-	const userData = useContext(UserData).user;
-
-	const kickedMember = async (event: React.KeyboardEvent<HTMLInputElement>): Promise<void> => {
-		if (event.key !== 'Enter') return;
-		const userId = await props.getUserId(event.currentTarget.value);
-
-		let obj = {
-			my_id: props.my_id,
-			other_id: userId,
-			chat_name: props.chat_name,
-			chat_id: props.chat_id,
-			time: kickHour.current?.checked ? 1 : 24,
-		}
-		userData.socket?.emit(props.route, obj);
-	}
 
 	return (
 		<>
@@ -67,7 +51,7 @@ export default function ButtonTime(props: KickMemberProps): JSX.Element {
 							defaultChecked >
 						</input>
 					</div>
-					<InputButton function={kickedMember} />
+					<InputButton function={ () => {} } />
 				</div>
 			}
 		</>

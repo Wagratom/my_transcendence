@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Phaser from "phaser";
 import background from "../../../assets/game/backgrounds/bgSpace2.png";
@@ -244,7 +244,7 @@ export default function Game(): JSX.Element {
 			physics: {
 				default: 'arcade',
 				arcade: {
-					gravity: { y: 0 },
+					gravity: { x: 0, y: 0 },
 					debug: false,
 				}
 			},

@@ -12,17 +12,13 @@
     "@types/react-dom": "^18.2.13",
     "ajv": "^8.12.0",
     "axios": "^1.5.1",
-    "js-cookie": "^3.0.5",
-    "parser": "^0.1.4",
     "phaser": "^3.70.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.9.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.16.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "socket.io-client": "^4.7.2",
-    "sweetalert2": "^11.10.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -31,12 +27,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -51,10 +41,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
-    "@eslint/js": "^9.8.0",
-    "@types/js-cookie": "^3.0.4",
-    "globals": "^15.9.0",
-    "typescript-eslint": "^8.0.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

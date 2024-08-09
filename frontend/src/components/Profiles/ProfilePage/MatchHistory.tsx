@@ -1,6 +1,4 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type MatchHistoryType = {
 	id: string;
@@ -14,20 +12,6 @@ type MatchHistoryType = {
 export default function MatchHistory({ userId }: { userId: string }) {
 	const [matchHistory, setMatchHistory] = useState<MatchHistoryType[]>([]);
 
-	const getMatchHistory = (): void => {
-		const ENV = `user_id=${userId}`
-		axios.get(`${process.env.REACT_APP_HOST_URL}/game/user/match-history/?${ENV}`, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420"
-			}
-		}).then((response) => {
-			setMatchHistory(response.data);
-		}).catch(() => {})
-	}
-	useEffect(() => {
-		getMatchHistory();
-	}, []);
 
 	if (matchHistory.length === 0) {
 		return (

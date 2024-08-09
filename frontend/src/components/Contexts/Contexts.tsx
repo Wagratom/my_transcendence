@@ -1,6 +1,4 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { Socket } from "socket.io-client";
 
 export type t_dataUser = {

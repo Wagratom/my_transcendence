@@ -11,15 +11,21 @@ import BlockFriend from "./BlockFriend";
 
 function Options() {
 	//Function that shows and handle with social options in the sidebar
-
-	const [inputAddFriend, setInputAddFriend] = useState(false);
-	const [inputDLTFriend, setInputDLTFriend] = useState(false);
-	const [inputBLOCKFriend, setInputBLOCKFriend] = useState(false);
+	const [openCurrentOption, setOpenCurrentOption] = useState('');
 
 	const socialCss: React.CSSProperties = {
 		fontFamily: 'bitsSC',
 		fontSize: '1.5rem',
 		fontWeight: 'bold',
+	}
+
+	const setCurrentOption = (option: string) => {
+		if (openCurrentOption === option) {
+			setOpenCurrentOption('');
+		}
+		else {
+			setOpenCurrentOption(option);
+		}
 	}
 
 	return (
@@ -28,54 +34,46 @@ function Options() {
 				<p style={socialCss}>Social</p>
 				<div className='d-flex justify-content-end align-items-center w-100 options'>
 					<MdBlock
+						id="blockFriend"
 						className="me-2"
 						type="button"
-						size={30}
-						onClick={
-							() => {
-								setInputAddFriend(false)
-								setInputDLTFriend(false)
-								setInputBLOCKFriend(!inputBLOCKFriend)
-							}
-						}
+						size={20}
+						onClick={() => setCurrentOption('BlockFriend')}
 					/>
 					<MdPersonRemoveAlt1
+						id="deleteFriend"
 						className="me-2"
 						type="button"
-						size={30}
+						size={20}
 						onClick={() => {
-							setInputBLOCKFriend(false)
-							setInputAddFriend(false)
-							setInputDLTFriend(!inputDLTFriend)
 						}}
 					/>
 					<MdPersonAddAlt1
+						id="addFriend"
 						className="me-2"
 						type="button"
-						size={30}
-						onClick={
-							() => {
-								setInputBLOCKFriend(false)
-								setInputDLTFriend(false)
-								setInputAddFriend(!inputAddFriend)
-							}
-						}
+						size={20}
+						onClick={() => setCurrentOption('RemoveFriend')}
 					/>
 					<FaUserFriends
+						id="listFriends"
 						className="me-2"
 						type="button"
-						size={30}
+						size={20}
 						onClick={() => { }}
 					/>
 					<FaPeopleGroup
+						id="addFriend"
 						className="me-2"
-						type="button" size={30} onClick={() => { }}
+						type="button"
+						size={20}
+						onClick={() => setCurrentOption('AddFriend')}
 					/>
 				</div>
 			</div>
-			{inputAddFriend ? <AddFriend /> : null}
-			{inputDLTFriend ?  <DeleteFriend />: null}
-			{inputBLOCKFriend ? <BlockFriend /> : null}
+			{openCurrentOption === 'addFriend' ? <AddFriend /> : null}
+			{openCurrentOption === 'DeleteFriend' ? <DeleteFriend /> : null}
+			{openCurrentOption === 'BlockFriend' ? <BlockFriend /> : null}
 		</div>
 	)
 }

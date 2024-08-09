@@ -4,7 +4,6 @@ import FormatMessages from '../FormatMessagens/FormatMessagens';
 import InputChats from '../InputChats';
 import './ChatPrivate.css'
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { UserData } from '../../Contexts/Contexts';
 import TitleChatPrivate from './Title';
 import { Socket } from 'socket.io-client';
@@ -19,38 +18,6 @@ export default function ChatPrivate(props: propsChatPrivate) {
 	const [messageErr, setMessageErr] = useState<String>("");
 	const userData = useContext(UserData).user;
 
-	const OpenDirectChat = () => {
-		axios.post(`${process.env.REACT_APP_HOST_URL}/chatroom/open-direct`, {
-			my_nickname: userData.nickname,
-			other_nickname: props.nick_name
-		}, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420",
-			}
-		}).then((res) => {
-			setMessages(res.data);
-		}).catch((err) => {
-			setMessageErr(err.response.data.msg)
-		})
-	}
-
-	useEffect(() => {
-		OpenDirectChat();
-	}, [])
-
-	useEffect(() => {
-		userData.socket?.on('directChatMessage', (data: any) => {
-			try {
-				data = JSON.parse(data);
-				setMessages((messages) => [...messages, data]);
-			} catch (error) {
-			}
-		});
-		return () => {
-			userData.socket?.off('directChatMessage');
-		}
-	}, [userData.socket])
 
 
 	let obj = {

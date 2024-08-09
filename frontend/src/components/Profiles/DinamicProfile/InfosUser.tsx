@@ -1,31 +1,12 @@
 import ProfilePhoto from "../ProfilePage/Perfil/Image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InfosUserPerfil } from "../typesProfile";
-import axios from "axios";
-import Cookies from "js-cookie";
 import HandleRank from "../RankMapings";
 import Rank from "../ProfilePage/Perfil/rank";
 import Pointer from "../ProfilePage/Perfil/pontos";
 
 export default function InfosUser({ nickName }: { nickName: string }): JSX.Element {
 	const [infosUser, setInfosUser] = useState<InfosUserPerfil>({} as InfosUserPerfil);
-
-	const getProfile = (): void => {
-		axios.get(`${process.env.REACT_APP_HOST_URL}/users/profile/?nick_name=${nickName}`, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420",
-			}
-		})
-		.then((response) => {
-			setInfosUser(response.data);
-		}
-		).catch(() => {})
-	}
-
-	useEffect(() => {
-		getProfile();
-	}, []);
 
 	let pointers: number = infosUser.wins - infosUser.loses;
 	const { rank, borderImg, borderWrite } = HandleRank(pointers);

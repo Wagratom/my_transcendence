@@ -1,9 +1,6 @@
 import { BiSolidLock } from 'react-icons/bi';
 import { t_chat } from './PublicChats';
 import { ReactElement, useState } from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import BannedWarningModal from './BannedWarningModal';
 
 type propsChatList = {
@@ -15,55 +12,6 @@ export default function ChatList(props: propsChatList) {
 	const [showWarningBan, setShowWarningBan] = useState(false);
 	const [messageErro, setMessageError] = useState("");
 
-	const getDataChat = (chatName: string, password: string) => {
-		return axios.post(`${process.env.REACT_APP_HOST_URL}/chatroom/open-group`, {
-			password: password,
-			chat_name: chatName,
-		}, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420",
-			},
-		}).then((response) => {
-			return response.data;
-		});
-	}
-
-	const getDataChatPublic = (chatName: string) => {
-		getDataChat(chatName, '').then(() => {
-			props.clickedChat(chatName);
-		}).catch((err) => {
-			setMessageError(err.response.data.msg)
-			setShowWarningBan(true);
-		});
-	}
-
-	const showModal = (chatName: string) => {
-		Swal.fire({
-			title: 'Digite a senha da sala',
-			input: 'password',
-			inputAttributes: {
-				autocapitalize: 'off'
-			},
-			showCancelButton: true,
-			showLoaderOnConfirm: true,
-			confirmButtonText: 'Entrar',
-			cancelButtonText: 'Cancelar',
-			preConfirm: async (password) => {
-				return getDataChat(chatName, password).catch(error => {
-					Swal.showValidationMessage(`Erro: ${error.response.data.msg}`);
-				});;
-			},
-			allowOutsideClick: () => !Swal.isLoading(),
-			customClass: {
-				popup: 'bg-custon-roxo modal-class',
-			},
-		}).then((result) => {
-			if (result.isConfirmed) {
-				props.clickedChat(chatName);
-			}
-		});
-	}
 
 	if (!props.listChats || props.listChats.length === 0) {
 		return (
@@ -77,7 +25,7 @@ export default function ChatList(props: propsChatList) {
 		return (
 			<div className="border-bottom border-end hover"
 				key={chat.id}
-				onClick={() => getDataChatPublic(chat.name)}
+				onClick={() => {}}
 			>
 				<div className='d-flex p-2 justify-content-between' id='sala1'>
 					<div>
@@ -96,7 +44,6 @@ export default function ChatList(props: propsChatList) {
 	const divProtectChats = (chat: t_chat): ReactElement => {
 		return (
 			<div className="border-bottom border-end hover"
-				onClick={() => showModal(chat.name)}
 				key={chat.id}
 			>
 				<div className='d-flex p-2 justify-content-between' id='sala1'>
