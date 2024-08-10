@@ -20,60 +20,72 @@ function Options() {
 	}
 
 	const setCurrentOption = (option: string) => {
+		let input = document.getElementById(option);
 		if (openCurrentOption === option) {
 			setOpenCurrentOption('');
 		}
 		else {
-			setOpenCurrentOption(option);
+			setOpenCurrentOption((prev) => {
+				if (input) {
+					input.style.transform = 'scale(1.3)';
+				}
+				if (prev !== '') {
+					let prevInput = document.getElementById(prev);
+					if (prevInput) {
+						prevInput.style.transform = 'scale(1)';
+					}
+				}
+				return option;
+			});
 		}
 	}
 
+	const cssDivButton: React.CSSProperties = {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		width: '16.4rem',
+		marginLeft: 'auto',
+	}
 	return (
 		<div className='p-2 text-white'>
 			<div className='d-flex align-items-center'>
 				<p style={socialCss}>Social</p>
-				<div className='d-flex justify-content-end align-items-center w-100 options'>
+				<div style={cssDivButton}>
 					<MdBlock
 						id="blockFriend"
-						className="me-2"
 						type="button"
 						size={20}
-						onClick={() => setCurrentOption('BlockFriend')}
+						onClick={() => setCurrentOption('blockFriend')}
 					/>
 					<MdPersonRemoveAlt1
 						id="deleteFriend"
-						className="me-2"
 						type="button"
 						size={20}
-						onClick={() => {
-						}}
+						onClick={() => setCurrentOption('deleteFriend')}
 					/>
 					<MdPersonAddAlt1
 						id="addFriend"
-						className="me-2"
 						type="button"
 						size={20}
-						onClick={() => setCurrentOption('RemoveFriend')}
+						onClick={() => setCurrentOption('addFriend')}
+
 					/>
 					<FaUserFriends
-						id="listFriends"
-						className="me-2"
 						type="button"
 						size={20}
 						onClick={() => { }}
 					/>
 					<FaPeopleGroup
-						id="addFriend"
-						className="me-2"
 						type="button"
 						size={20}
-						onClick={() => setCurrentOption('AddFriend')}
+						onClick={() => { }}
 					/>
 				</div>
 			</div>
 			{openCurrentOption === 'addFriend' ? <AddFriend /> : null}
-			{openCurrentOption === 'DeleteFriend' ? <DeleteFriend /> : null}
-			{openCurrentOption === 'BlockFriend' ? <BlockFriend /> : null}
+			{openCurrentOption === 'deleteFriend' ? <DeleteFriend /> : null}
+			{openCurrentOption === 'blockFriend' ? <BlockFriend /> : null}
 		</div>
 	)
 }
