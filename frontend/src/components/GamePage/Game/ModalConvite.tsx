@@ -1,4 +1,3 @@
-import { Modal } from "react-bootstrap";
 import { UserData } from "../../Contexts/Contexts";
 import { useContext } from "react";
 import { dataConvite } from "./Game";
@@ -27,19 +26,20 @@ export function ModalConvite(props: propsModalConvite): JSX.Element {
 		props.setOpenChat(false);
 	}
 
-	return (
-		<Modal show={true} onHide={() => props.setOpenChat(false)}>
-			<Modal.Header closeButton style={cssBackgroundModal}>
-				<p>Convite para partida</p>
-			</Modal.Header>
-			<Modal.Body>
-				<p className="fs-5 text-center"> {props.dataConvite.myNickname} vs {userData.nickname} </p>
-				<p className="fs-5 text-center"> {props.dataConvite.myNickname} te convidou para jogar! </p>
-				<div className='w-100 d-flex pe-3 justify-content-between'>
-					<button className="btn btn-primary" onClick={sendResponse}> Aceitar </button>
-					<button className="btn btn-danger" onClick={() => props.setOpenChat(false)}> Cancelar </button>
-				</div>
-			</Modal.Body>
-		</Modal>
+	return (<div></div>
+
+		// <Modal show={true} onHide={() => props.setOpenChat(false)}>
+		// 	<Modal.Header closeButton style={cssBackgroundModal}>
+		// 		<p>Convite para partida</p>
+		// 	</Modal.Header>
+		// 	<Modal.Body>
+		// 		<p className="fs-5 text-center"> {props.dataConvite.myNickname} vs {userData.nickname} </p>
+		// 		<p className="fs-5 text-center"> {props.dataConvite.myNickname} te convidou para jogar! </p>
+		// 		<div className='w-100 d-flex pe-3 justify-content-between'>
+		// 			<button className="btn btn-primary" onClick={sendResponse}> Aceitar </button>
+		// 			<button className="btn btn-danger" onClick={() => props.setOpenChat(false)}> Cancelar </button>
+		// 		</div>
+		// 	</Modal.Body>
+		// </Modal>
 	)
 }

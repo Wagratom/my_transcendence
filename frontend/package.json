@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.2.13",
     "ajv": "^8.12.0",
     "axios": "^1.5.1",
+    "bootstrap": "^5.3.3",
     "phaser": "^3.70.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

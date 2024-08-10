@@ -1,7 +1,5 @@
-import React, { FormEvent, useContext, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { RiLockPasswordLine } from 'react-icons/ri'
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 
 export default function AlterPassword({ funcChange }: {
@@ -22,7 +20,7 @@ export default function AlterPassword({ funcChange }: {
 				Alterar Senha
 			</h5>
 
-			<Modal show={openChat} onHide={() => setOpenChat(false)}>
+			{/* <Modal show={openChat} onHide={() => setOpenChat(false)}>
 				<Modal.Header closeButton>
 					<RiLockPasswordLine className="foto-list-friends bg-light text-black me-3 p-1 z-10" size={30} />
 					Alterar Senha
@@ -48,7 +46,7 @@ export default function AlterPassword({ funcChange }: {
 					</div>
 					</form>
 				</Modal.Body>
-			</Modal>
+			</Modal> */}
 		</>
 
 	)
