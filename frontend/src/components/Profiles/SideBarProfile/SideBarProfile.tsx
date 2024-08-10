@@ -21,15 +21,21 @@ export default function MiniProfile(props: propsMiniProfile) {
 		padding: '1.5rem 1rem',
 	}
 
+	const wrapper: React.CSSProperties = {
+		width: '100%',
+		height: '100%',
+		position: 'relative',
+	}
+
 	return (
-		<>
-			<div className='position-absolute top-0 end-0 h-100' style={cssMiniprfile}>
+		<div className='position-absolute top-0 end-0 h-100' style={cssMiniprfile}>
+			<div style={wrapper}>
 				<MiniPerfilUser handleInitialScreen={props.handleInitialScreen} />
 				<hr className='m-0 w-100 text-white'></hr>
-				<Options/>
-				{/* <ListFriends players={players} getPlayers={getPlayers} /> */}
+				<Options />
 			</div>
-		</>
+			{/* <ListFriends players={players} getPlayers={getPlayers} /> */}
+		</div>
 	);
 }
 

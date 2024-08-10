@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import backgroundInput from '../../../../assets/game/backgrounds/sideBar/bgInputNickname.png'
+import backgroundInput from '../../../../../assets/game/backgrounds/sideBar/bgInputNickname.png'
 import { IoSendSharp } from "react-icons/io5";
 
 export default function InputNickname({ _function }: { _function: (nickname: string) => void }) {

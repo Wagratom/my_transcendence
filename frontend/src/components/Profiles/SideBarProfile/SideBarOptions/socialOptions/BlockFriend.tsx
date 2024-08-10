@@ -1,4 +1,3 @@
-import backgroundInput from '../../../../assets/game/backgrounds/sideBar/bgInputNickname.png'
 import InputNickname from './InputNickname'
 export default function BlockFriend() {
 
