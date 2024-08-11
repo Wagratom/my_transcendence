@@ -8,6 +8,7 @@ import { Multer } from 'multer';
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { User } from '@prisma/client';
 
 
 @Injectable()
@@ -16,10 +17,6 @@ export class UsersService implements UsersServiceInterface {
 		private readonly prismaService: UsersRepository,
 		private readonly jwtService: JwtService
 	) { }
-
-	async getObjectSize(obj: any): Promise<number> {
-		return Object.keys(obj).length;
-	}
 
 	async getUsersByJwt(jwt: string): Promise<UsersResponseDto> {
 		try {
@@ -44,7 +41,7 @@ export class UsersService implements UsersServiceInterface {
 	}
 
 	async getProfile(req: Request): Promise<UsersResponseDto> {
-		const jwt = await this.getJWT(req);
+		const jwt: string = await this.getJWT(req);
 		return await this.getUsersByJwt(jwt);
 	}
 
@@ -52,18 +49,19 @@ export class UsersService implements UsersServiceInterface {
 		if (!photo) {
 			throw new UnauthorizedException('No photo found');
 		}
-		let photoName = photo.originalname.split('.')[0];
-		const photoPath = path.resolve(process.env.PHOTO_PATH, `${photoName}${username}`);
+		let photoName: string = photo.originalname.split('.')[0];
+		const photoPath: string = path.resolve(process.env.PHOTO_PATH, `${photoName}${username}`);
 		fs.writeFileSync(photoPath, photo.buffer);
 		return photoPath[0] === '/' ? `/api/users${photoPath}` : `/api/users/${photoPath}`;
 	}
 
 	async updateProfile(req: Request, nickname: string, photo: Multer.file): Promise<UsersResponseDto | void> {
-		const jwt = await this.getJWT(req);
+		if (!nickname && !photo) return
+
+		const jwt: string = await this.getJWT(req);
 		let update = {
 			username: (await this.getUsersByJwt(jwt)).username
 		}
-		if (!nickname && !photo) return
 		if (photo) {
 			update['photo'] = await this.uploadPhoto(photo, update.username);
 		}
@@ -74,7 +72,7 @@ export class UsersService implements UsersServiceInterface {
 	}
 
 	async getPhoto(username: string): Promise<Buffer | void> {
-		const photoPath = path.resolve(process.env.PHOTO_PATH, username);
+		const photoPath: string = path.resolve(process.env.PHOTO_PATH, username);
 		if (fs.existsSync(photoPath)) {
 			try {
 				const photoBuffer = await fs.promises.readFile(photoPath);
@@ -88,37 +86,33 @@ export class UsersService implements UsersServiceInterface {
 	}
 
 	async getAllPlayers(): Promise<UsersResponseDto[]> {
-		let users = await this.prismaService.getAllUsers();
-		let sizeUsers = await this.getObjectSize(users);
-		let response = new UsersResponseDto[sizeUsers];
+		let users: User[] = await this.prismaService.getAllUsers();
+		let response: UsersResponseDto[] = [];
 
-		for (let i = 0; i < sizeUsers; i++) {
+		for (let i = 0; i < users.length; i++) {
 			response[i] = new UsersResponseDto(users[i]);
 		}
 		return response;
 	}
 
 	async getFriendsPlayer(username: string): Promise<UsersResponseDto[]> {
-		let friends = await this.prismaService.getFriendsUser(username);
-		console.log(friends);
-		let sizeFriends = await this.getObjectSize(friends);
-		let response = new UsersResponseDto[sizeFriends];
+		let friends: User[] = await this.prismaService.getFriendsUser(username);
+		let response: UsersResponseDto[] = [];
 
-		for (let i = 0; i < sizeFriends; i++) {
-			response[i] = new UsersResponseDto(friends[i]);
+		for (let i = 0; i < friends.length; i++) {
+			response.push(new UsersResponseDto(friends[i]));
 		}
 		return response;
 	}
 
 	async addFriend(req: Request, username: string): Promise<void> {
-		const jwt = await this.getJWT(req);
-		const user = await this.getUsersByJwt(jwt);
-		const friend = await this.prismaService.findUser(username);
+		const jwt: string = await this.getJWT(req);
+		const user: UsersResponseDto = await this.getUsersByJwt(jwt);
+		const friend: User = await this.prismaService.findUser(username);
+
 		if (!friend) {
 			throw new NotFoundException('User not found');
 		}
 		await this.prismaService.addFriend(user.id, friend.id);
-		return
 	}
-
 }
