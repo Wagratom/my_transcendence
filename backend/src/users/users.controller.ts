@@ -17,6 +17,11 @@ export class UsersController {
 		return await this.usersService.getProfile(req);
 	}
 
+	@Post('addFriend')
+	async addFriend(@Body() body: { username: string }, @Req() req: Request) {
+		return await this.usersService.addFriend(req, body.username);
+	}
+
 	@Post('updateProfile')
 	@UseInterceptors(FileInterceptor('avatar'))
 	async updateProfile(
@@ -31,11 +36,11 @@ export class UsersController {
 	async getPhoto(
 		@Param('username') username: string,
 		@Res() res: Response
-
 	): Promise<Buffer | void> {
 		const photoBuffer = await this.usersService.getPhoto(username);
 		res.setHeader('Content-Type', 'image/jpeg');
 		res.send(photoBuffer);
 		return photoBuffer;
 	}
+
 }

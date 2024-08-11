@@ -30,20 +30,26 @@ model User {
 
   winners          Int          @default(0)
   losses           Int          @default(0)
-  sentRequests     Friendship[] @relation("Requester")
-  receivedRequests Friendship[] @relation("Addressee")
+  sentRequests     Friendship[] @relation("sentRequests")
+  receivedRequests Friendship[] @relation("receivedRequests")
 }
 
 
+enum StatusFriendship {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
 model Friendship {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  friendId  Int
-  status    String
-  createdAt DateTime @default(now())
+  id                   Int              @id @default(autoincrement())
+  sentRequestsId       Int
+  receivedRequestsId   Int
+  status               StatusFriendship
+  createdAt            DateTime         @default(now())
 
-  requester User @relation("Requester", fields: [userId], references: [id])
-  addressee User @relation("Addressee", fields: [friendId], references: [id])
+  sentRequests User @relation("sentRequests", fields: [sentRequestsId], references: [id])
+  addressee     User @relation("receivedRequests", fields: [receivedRequestsId], references: [id])
 
-  @@unique([userId, friendId])
+  @@unique([sentRequestsId, receivedRequestsId])
 }

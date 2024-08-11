@@ -1,6 +1,7 @@
 import { User } from "@prisma/client";
 
 export class UsersResponseDto {
+	id: number
 	username: string;
 	nickname: string;
 	email: string;
@@ -8,6 +9,7 @@ export class UsersResponseDto {
 	status: boolean;
 
 	constructor(user: User) {
+	  this.id = user.id
 	  this.username = user.login;
 	  this.nickname = user.nickname;
 	  this.email = user.email;
