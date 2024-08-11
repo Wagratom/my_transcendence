@@ -13,27 +13,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id               Int          @id @default(autoincrement())
-  login            String       @unique
-  nickname         String?      @unique
-  email            String       @unique
-  password         String
-  avatar           String?      @default("https://img.lovepik.com/bg/20231218/Stunning-Wolf-HD-Wallpaper-Art-Full-HD-1920x1080-1080p-Background_2634113_wh860.jpg!/fw/860")
-  isOnline         Boolean      @default(true)
+  id       Int     @id @default(autoincrement())
+  login    String  @unique
+  nickname String? @unique
+  email    String  @unique
+  password String
+  avatar   String? @default("https://img.lovepik.com/bg/20231218/Stunning-Wolf-HD-Wallpaper-Art-Full-HD-1920x1080-1080p-Background_2634113_wh860.jpg!/fw/860")
+  isOnline Boolean @default(true)
 
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
-  lastLogin        DateTime?    @default(now())
-
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  lastLogin DateTime? @default(now())
 
   winners          Int          @default(0)
   losses           Int          @default(0)
   sentRequests     Friendship[] @relation("sentRequests")
   receivedRequests Friendship[] @relation("receivedRequests")
 }
-
 
 enum StatusFriendship {
   PENDING
@@ -42,14 +39,14 @@ enum StatusFriendship {
 }
 
 model Friendship {
-  id                   Int              @id @default(autoincrement())
-  sentRequestsId       Int
-  receivedRequestsId   Int
-  status               StatusFriendship
-  createdAt            DateTime         @default(now())
+  id                 Int              @id @default(autoincrement())
+  sentRequestsId     Int
+  receivedRequestsId Int
+  status             StatusFriendship
+  createdAt          DateTime         @default(now())
 
-  sentRequests User @relation("sentRequests", fields: [sentRequestsId], references: [id])
-  addressee     User @relation("receivedRequests", fields: [receivedRequestsId], references: [id])
+  sentRequests     User @relation("sentRequests", fields: [sentRequestsId], references: [id])
+  receivedRequests User @relation("receivedRequests", fields: [receivedRequestsId], references: [id])
 
   @@unique([sentRequestsId, receivedRequestsId])
 }

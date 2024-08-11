@@ -98,6 +98,18 @@ export class UsersService implements UsersServiceInterface {
 		return response;
 	}
 
+	async getFriendsPlayer(username: string): Promise<UsersResponseDto[]> {
+		let friends = await this.prismaService.getFriendsUser(username);
+		console.log(friends);
+		let sizeFriends = await this.getObjectSize(friends);
+		let response = new UsersResponseDto[sizeFriends];
+
+		for (let i = 0; i < sizeFriends; i++) {
+			response[i] = new UsersResponseDto(friends[i]);
+		}
+		return response;
+	}
+
 	async addFriend(req: Request, username: string): Promise<void> {
 		const jwt = await this.getJWT(req);
 		const user = await this.getUsersByJwt(jwt);

@@ -22,6 +22,11 @@ export class UsersController {
 		return await this.usersService.getAllPlayers();
 	}
 
+	@Get('friends/:username')
+	async getFriendsPlayer(@Query('username') username: string) {
+		return await this.usersService.getFriendsPlayer(username);
+	}
+
 	@Post('addFriend')
 	async addFriend(@Body() body: { username: string }, @Req() req: Request) {
 		return await this.usersService.addFriend(req, body.username);
