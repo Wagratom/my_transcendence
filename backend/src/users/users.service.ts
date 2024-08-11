@@ -17,6 +17,10 @@ export class UsersService implements UsersServiceInterface {
 		private readonly jwtService: JwtService
 	) { }
 
+	async getObjectSize(obj: any): Promise<number> {
+		return Object.keys(obj).length;
+	}
+
 	async getUsersByJwt(jwt: string): Promise<UsersResponseDto> {
 		try {
 			const payload = await this.jwtService.verifyAsync(jwt, { secret: process.env.JWT_SECRET });
@@ -83,6 +87,17 @@ export class UsersService implements UsersServiceInterface {
 		}
 	}
 
+	async getAllUsers(): Promise<UsersResponseDto[]> {
+		let users = await this.prismaService.getAllUsers();
+		let sizeUsers = await this.getObjectSize(users);
+		let response = new UsersResponseDto[sizeUsers];
+
+		for (let i = 0; i < sizeUsers; i++) {
+			response[i] = new UsersResponseDto(users[i]);
+		}
+		return response;
+	}
+
 	async addFriend(req: Request, username: string): Promise<void> {
 		const jwt = await this.getJWT(req);
 		const user = await this.getUsersByJwt(jwt);
@@ -91,7 +106,7 @@ export class UsersService implements UsersServiceInterface {
 			throw new NotFoundException('User not found');
 		}
 		await this.prismaService.addFriend(user.id, friend.id);
-		return 
+		return
 	}
 
 }

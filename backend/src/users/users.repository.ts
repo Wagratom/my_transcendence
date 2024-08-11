@@ -19,6 +19,11 @@ export default class UsersRepository implements UserRepositoryInterface {
 		return user;
 	}
 
+	async getAllUsers(): Promise<User[]> {
+		let users = await this.prismaService.user.findMany();
+		return users;
+	}
+
 	async updateUser(updateData: { username: string, nickname?: string; photo?: string }): Promise<UsersResponseDto> {
 		let user = await this.prismaService.user.update({
 			where: {
@@ -41,4 +46,5 @@ export default class UsersRepository implements UserRepositoryInterface {
 			}
 		});
 	}
+
 }

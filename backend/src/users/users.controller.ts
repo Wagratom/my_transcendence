@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Request } from 'express';
 import { UploadPhoto } from './dto/users.dto';
@@ -15,6 +15,11 @@ export class UsersController {
 	@Get('getProfile')
 	async getProfile(@Req() req: Request) {
 		return await this.usersService.getProfile(req);
+	}
+
+	@Get('all')
+	async getAllUsers() {
+		return await this.usersService.getAllUsers();
 	}
 
 	@Post('addFriend')
