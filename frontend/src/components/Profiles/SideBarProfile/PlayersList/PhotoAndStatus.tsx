@@ -8,9 +8,12 @@ type propsPhotoAndStatus = {
 
 export default function PhotoAndStatus(props: propsPhotoAndStatus): JSX.Element {
 	const cssImageDiv: React.CSSProperties = {
-		height: '5rem',
-		width: '5rem',
+		height: '4rem',
+		width: '4rem',
 		borderRadius: '50%',
+		display: 'flex',
+		alignContent: 'center',
+
 	}
 
 	const cssImage: React.CSSProperties = {
@@ -23,7 +26,7 @@ export default function PhotoAndStatus(props: propsPhotoAndStatus): JSX.Element 
 		<>
 			<div style={cssImageDiv}>
 				<img
-					className="img-thumbnail"
+					className=""
 					style={cssImage}
 					src={props.avatar}
 					alt='foto'
