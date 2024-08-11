@@ -1,4 +1,4 @@
-import ListFriends, { Players } from "../../Profiles/SideBarProfile/ListFriends";
+import ListFriends, { Players } from "../../Profiles/SideBarProfile/PlayersList/ListFriends";
 import DinamicProfile from "../../Profiles/DinamicProfile/DinamicProfile";
 
 import { createContext, useContext, useEffect } from "react";
@@ -72,12 +72,12 @@ export default function ChatPublic(props: propsPageChats) {
 			<div className="row g-0 h-100 p-2">
 				<ChatContext.Provider value={{ chatData: chatData, setDataChat, setDinamicProfile }}>
 					<div className="col-3 border-end h-100">
-						<ListFriends
+						{/* <ListFriends
 							players={chatData.members}
 							getPlayers={() => { }}
 							admin={chatData.admin}
 							mute={chatData.mutted}
-						/>
+						/> */}
 					</div>
 
 					<div className="col-9 d-flex flex-column h-100 position-relative">

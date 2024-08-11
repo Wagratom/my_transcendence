@@ -19,7 +19,7 @@ export default function BarConfigurations(props: propsBarConfigurations) {
 			<img
 				src="https://i.etsystatic.com/37688069/r/il/d3e600/5143421340/il_600x600.5143421340_sm1f.jpg"
 				alt="bordão sunny one picie"
-				className="foto-list-friends me-2 ms-1"
+				className="me-2 ms-1"
 			/>
 			<h3>{props.chatName}</h3>
 			<div className="my-auto ms-auto">
