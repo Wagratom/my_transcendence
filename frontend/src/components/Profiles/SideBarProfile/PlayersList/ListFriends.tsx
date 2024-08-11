@@ -1,6 +1,7 @@
 import { IoGameControllerOutline } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import PhotoAndStatus from "./PhotoAndStatus";
+import axios from "axios";
 
 export type Players = {
 	avatar: string,
@@ -23,10 +24,11 @@ export default function ListFriends({ url }: { url: string }) {
 	};
 
 	useEffect(() => {
-		// axios.get(url).then((response) => {
-		// 	console.log(response.data);
-		// 	setPlayers(response.data);
-		// });
+		console.log(url);
+		axios.get(url).then((response) => {
+			console.log(response.data);
+			setPlayers(response.data);
+		});
 	}, [url]);
 
 	// onClick={() => handleOpenChatPrivate(play.nickname, play.avatar)}

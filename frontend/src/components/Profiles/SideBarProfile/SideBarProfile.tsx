@@ -1,10 +1,10 @@
 import MiniPerfilUser from './MineProfileUser/MiniProfileUser';
-import Options from './SideBarOptions/Options';
 import backgroundSideBar from '../../../assets/game/backgrounds/sideBar/bgPntTerra.jpg';
 import { UserData } from '../../Contexts/Contexts';
 import { useContext, useState } from 'react';
 import ListFriends from './PlayersList/ListFriends';
 import Footer from './Footer/Footer';
+import Options from './SideBarOptions/Options';
 
 type propsMiniProfile = {
 	handleInitialScreen: React.Dispatch<React.SetStateAction<string>>;
@@ -38,10 +38,9 @@ export default function MiniProfile(props: propsMiniProfile) {
 			<div style={wrapper}>
 				<MiniPerfilUser handleInitialScreen={props.handleInitialScreen} />
 				<hr className='m-0 w-100 text-white'></hr>
-				<Options />
+				<Options setUrlListSideBar={setUrlToGetPlayers} />
 				<ListFriends url={urlToGetPlayers} />
 				<Footer />
-
 			</div>
 		</div>
 	);
