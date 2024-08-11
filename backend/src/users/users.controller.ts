@@ -19,7 +19,7 @@ export class UsersController {
 
 	@Get('all')
 	async getAllUsers() {
-		return await this.usersService.getAllUsers();
+		return await this.usersService.getAllPlayers();
 	}
 
 	@Post('addFriend')

@@ -87,7 +87,7 @@ export class UsersService implements UsersServiceInterface {
 		}
 	}
 
-	async getAllUsers(): Promise<UsersResponseDto[]> {
+	async getAllPlayers(): Promise<UsersResponseDto[]> {
 		let users = await this.prismaService.getAllUsers();
 		let sizeUsers = await this.getObjectSize(users);
 		let response = new UsersResponseDto[sizeUsers];

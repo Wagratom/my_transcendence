@@ -6,6 +6,6 @@ export interface UsersServiceInterface {
 	getProfile(red: Request): Promise<UsersResponseDto>;
 	updateProfile(red: Request, nickname: string, file: Multer.file): Promise<UsersResponseDto | void>;
 	getPhoto(username: string): Promise<Buffer | void>;
-	getAllUsers(): Promise<UsersResponseDto[]>;
+	getAllPlayers(): Promise<UsersResponseDto[]>;
 	addFriend(req: Request, username: string): Promise<void>;
 }
