@@ -1,5 +1,5 @@
 import { t_dataUser } from "../../../../Contexts/Contexts"
-import StatusPlayer from "../../statusPlayer"
+import StatusPlayer from "./statusPlayer"
 
 export default function PhotoAndStatus({user}: {user: t_dataUser}) : JSX.Element {
 	const cssDivInfoProfile: React.CSSProperties = {

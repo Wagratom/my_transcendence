@@ -1,13 +1,19 @@
-import React from 'react';
-import MiniPerfilUser from './MineProfileUser/MiniPerfilUser';
+import MiniPerfilUser from './MineProfileUser/MiniProfileUser';
 import Options from './SideBarOptions/Options';
 import backgroundSideBar from '../../../assets/game/backgrounds/sideBar/bgPntTerra.jpg';
+import { UserData } from '../../Contexts/Contexts';
+import { useContext, useState } from 'react';
+import ListFriends from './PlayersList/ListFriends';
+import Footer from './Footer/Footer';
 
 type propsMiniProfile = {
 	handleInitialScreen: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MiniProfile(props: propsMiniProfile) {
+	let { user } = useContext(UserData);
+	const [urlToGetPlayers, setUrlToGetPlayers] = useState<string>(`/api/users/friends/${user.username}`);
+
 	const cssMiniprfile: React.CSSProperties = {
 		display: 'flex',
 		flexDirection: 'column',
@@ -33,8 +39,10 @@ export default function MiniProfile(props: propsMiniProfile) {
 				<MiniPerfilUser handleInitialScreen={props.handleInitialScreen} />
 				<hr className='m-0 w-100 text-white'></hr>
 				<Options />
+				<ListFriends url={urlToGetPlayers} />
+				<Footer />
+
 			</div>
-			{/* <ListFriends players={players} getPlayers={getPlayers} /> */}
 		</div>
 	);
 }

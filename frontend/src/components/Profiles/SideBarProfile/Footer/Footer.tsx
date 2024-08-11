@@ -11,8 +11,9 @@ export default function Footer() {
 		padding: '0 1rem 1rem 0',
 		display: 'flex',
 		alignContent: 'center',
+		color: 'white'
 	}
-	
+
 	return (
 		<div style={cssFooter}>
 			<IoMdNotifications size={20} style={{ marginLeft: 'auto' }} />
