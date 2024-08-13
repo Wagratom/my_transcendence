@@ -1,12 +1,12 @@
 import { User } from "@prisma/client";
 
 export class UsersResponseDto {
-	id: number
+	id: number;
 	username: string;
 	nickname: string;
 	email: string;
 	avatar: string;
-	status: boolean;
+	isOnline: boolean;
 
 	constructor(user: User) {
 	  this.id = user.id
@@ -14,6 +14,6 @@ export class UsersResponseDto {
 	  this.nickname = user.nickname;
 	  this.email = user.email;
 	  this.avatar = user.avatar;
-	  this.status = user.isOnline;
+	  this.isOnline = user.isOnline;
 	}
   }
