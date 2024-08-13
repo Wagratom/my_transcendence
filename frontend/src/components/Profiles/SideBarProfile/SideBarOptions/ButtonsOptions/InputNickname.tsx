@@ -38,6 +38,7 @@ export default function InputNickname({ _function }: { _function: (nickname: str
 				type='text'
 				style={cssNicknameInput}
 				placeholder='nickname'
+				onKeyDown={(e) => e.key === 'Enter' && _function(nickname.current?.value || '')}
 			/>
 			<IoSendSharp
 				size={13}
