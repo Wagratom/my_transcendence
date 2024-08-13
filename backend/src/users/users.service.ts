@@ -105,11 +105,20 @@ export class UsersService implements UsersServiceInterface {
 		return response;
 	}
 
+	async getFriendRequests(req: Request): Promise<UsersResponseDto[]> {
+		const user: UsersResponseDto = await this.getProfile(req)
+		const requests = await this.prismaService.getFriendRequests(user.nickname)
+		let response: UsersResponseDto[] = []
+		for (let i = 0; i < requests.length; i++) {
+			response.push(new UsersResponseDto(requests[i]))
+		}
+		return response
+	}
+
 	async addFriend(req: Request, username: string): Promise<void> {
 		const jwt: string = await this.getJWT(req);
 		const user: UsersResponseDto = await this.getUsersByJwt(jwt);
 		const friend: User = await this.prismaService.findUser(username);
-
 		if (!friend) {
 			throw new NotFoundException('User not found');
 		}

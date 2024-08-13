@@ -61,6 +61,38 @@ export default class UsersRepository implements UserRepositoryInterface {
 	}
 
 
+	async getFriendRequests(username: string): Promise<User[]> {
+		const user = await this.prismaService.user.findUnique({
+			where: {
+				login: username
+			},
+			include: {
+				sentRequests: {
+					where: {
+						status: StatusFriendship.PENDING
+					},
+					include: {
+						receivedRequests: true
+					}
+				},
+				receivedRequests: {
+					where: {
+						status: StatusFriendship.PENDING
+					},
+					include: {
+						sentRequests: true
+					}
+				}
+			}
+		})
+		const sentFriendRequests = user.sentRequests.map(request => request.receivedRequests);
+		const receivedFriendRequests = user.receivedRequests.map(request => request.sentRequests);
+
+		return [...sentFriendRequests, ...receivedFriendRequests];
+
+	}
+
+
 	async updateUser(updateData: { username: string, nickname?: string; photo?: string }): Promise<UsersResponseDto> {
 		let user = await this.prismaService.user.update({
 			where: {

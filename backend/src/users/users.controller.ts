@@ -27,6 +27,11 @@ export class UsersController {
 		return await this.usersService.getFriendsPlayer(username);
 	}
 
+	@Get('getFriendRequests')
+	async getFriendRequests(@Req() req: Request) {
+		return await this.usersService.getFriendRequests(req);
+	}
+
 	@Post('addFriend')
 	async addFriend(@Body() body: { username: string }, @Req() req: Request) {
 		return await this.usersService.addFriend(req, body.username);
