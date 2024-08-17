@@ -278,7 +278,7 @@ export default function Game(): JSX.Element {
 			{collisionPnt === 'planetFire' && <SettingsPath openSettingsPath={setCollisionPnt} />}
 			{collisionPnt === 'satelite' && <PageChats openPageChats={setCollisionPnt} />}
 			{collisionPnt === 'base' && <Ranking openStore={setCollisionPnt} />}
-			{collisionPnt === 'planetTerra' && <MiniProfile handleInitialScreen={setCollisionPnt} />}
+			<MiniProfile handleInitialScreen={setCollisionPnt} />
 			{collisionPnt === 'Lua' && <DinamicProfile openDinamicProfile={setCollisionPnt} nickName={userData.nickname} id={userData.id} />}
 		</div>
 	)

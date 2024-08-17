@@ -61,7 +61,7 @@ export default function Options({ setUrlListSideBar }: { setUrlListSideBar: Reac
 	}
 
 	return (
-		<div className='p-2 text-white'>
+		<div className='p-2 text-white' style={{height: '6rem'}}>
 			<div className='d-flex align-items-center'>
 				<p style={socialCss}>Social</p>
 				<div style={cssDivButton}>

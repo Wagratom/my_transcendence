@@ -20,7 +20,6 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 		);
 	}
 
-
 	const cssMainDiv: React.CSSProperties = {
 		display: 'flex',
 		padding: '1rem',

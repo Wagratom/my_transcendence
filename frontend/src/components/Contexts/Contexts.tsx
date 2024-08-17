@@ -6,7 +6,7 @@ export type t_dataUser = {
 	username: string;
 	nickname: string;
 	avatar: string;
-	status: boolean;
+	isOnline: boolean;
 
 	coins: number;
 	twoFA: boolean;

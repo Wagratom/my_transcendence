@@ -18,11 +18,9 @@ export default function ListFriends({ url }: { url: string }) {
 	const { user } = useContext(UserData);
 
 	useEffect(() => {
-		axios.get(url).then((response) => {
-			setPlayers(response.data);
-		}).catch((error) => {
-			console.log(error);
-		});
+		axios.get(url)
+		.then((response) => setPlayers(response.data))
+		.catch((error) => console.log(error));
 	}, [url]);
 
 	// onClick={() => handleOpenChatPrivate(play.nickname, play.avatar)}

@@ -22,7 +22,7 @@ export default function PhotoAndStatus({user}: {user: t_dataUser}) : JSX.Element
 						style={cssPhotoProfile}
 						/>
 				</div>
-				<StatusPlayer status={user.status} nickName={user.nickname} />
+				<StatusPlayer status={user.isOnline} nickName={user.nickname} />
 			</div>
 	)
 }

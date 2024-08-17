@@ -1,8 +1,25 @@
+import axios from "axios";
+import { useContext, useEffect } from "react";
 import { FaMessage } from "react-icons/fa6";
 import { IoMdNotifications } from "react-icons/io";
+import { UserData } from "../../../Contexts/Contexts";
 
 
 export default function Footer() {
+
+	const getFriendRequests = () => {
+		axios.get(`/api/users/getFriendRequests/`)
+		.then((response) => {
+			console.log(response.data)
+		}).catch((err) => {
+			console.log(err)
+		})
+	}
+
+	useEffect(() => {
+		getFriendRequests()
+	}, [])
+
 	const cssFooter: React.CSSProperties = {
 		position: 'absolute',
 		bottom: '0',
