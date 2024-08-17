@@ -124,4 +124,14 @@ export class UsersService implements UsersServiceInterface {
 		}
 		await this.prismaService.addFriend(user.id, friend.id);
 	}
+
+	async deleteFriend(req: Request, username: string): Promise<void> {
+		const jwt: string = await this.getJWT(req);
+		const user: UsersResponseDto = await this.getUsersByJwt(jwt);
+		const friend: User = await this.prismaService.findUser(username);
+		if (!friend) {
+			throw new NotFoundException('User not found');
+		}
+		await this.prismaService.deleteFriend(user.id, friend.id);
+	}
 }

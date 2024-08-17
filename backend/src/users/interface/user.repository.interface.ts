@@ -7,7 +7,7 @@ export default interface UserRepositoryInterface {
   getAllUsers(): Promise<User[]>;
   getFriendsUser(username: string): Promise<User[]>;
   getFriendRequests(username: string): Promise<User[]>;
-
   updateUser(updateData: {nickname?: string, file?: Multer.file}): Promise<UsersResponseDto>;
   addFriend(sendID: number, friendID: number): Promise<void>;
+  deleteFriend(sendID: number, friendID: number): Promise<void>;
 }

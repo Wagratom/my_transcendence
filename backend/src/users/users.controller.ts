@@ -37,6 +37,11 @@ export class UsersController {
 		return await this.usersService.addFriend(req, body.username);
 	}
 
+	@Post('deleteFriend')
+	async deleteFriend(@Body() body: { username: string }, @Req() req: Request) {
+		return await this.usersService.deleteFriend(req, body.username);
+	}
+
 	@Post('updateProfile')
 	@UseInterceptors(FileInterceptor('avatar'))
 	async updateProfile(

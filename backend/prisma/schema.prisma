@@ -36,6 +36,7 @@ enum StatusFriendship {
   PENDING
   ACCEPTED
   REJECTED
+  DELETED
 }
 
 model Friendship {

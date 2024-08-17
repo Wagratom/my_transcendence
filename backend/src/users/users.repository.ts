@@ -121,12 +121,12 @@ export default class UsersRepository implements UserRepositoryInterface {
 		})
 	}
 
-	async createNewFriendship(sendID: number, friendID: number): Promise<void>{
+	async createNewFriendship(sendID: number, friendID: number, status: StatusFriendship): Promise<void>{
 		await this.prismaService.friendship.create({
 			data: {
 					sentRequestsId: sendID,
 					receivedRequestsId: friendID,
-					status: StatusFriendship.ACCEPTED
+					status: status
 				}
 		})
 	}
@@ -148,7 +148,20 @@ export default class UsersRepository implements UserRepositoryInterface {
 			if (friendship) {
 				await this.updateStatusFriendship(friendship.id, StatusFriendship.ACCEPTED);
 			} else {
-				await this.createNewFriendship(sendID, friendID);
+				await this.createNewFriendship(sendID, friendID, StatusFriendship.ACCEPTED);
+			}
+		} catch (error) {
+			throw new InternalServerErrorException("Error: Unable to add friend")
+		}
+	}
+
+	async deleteFriend(sendID: number, friendID: number): Promise<void> {
+		try {
+			let friendship = await this.getFriendship(sendID, friendID);
+			if (friendship) {
+				await this.updateStatusFriendship(friendship.id, StatusFriendship.DELETED);
+			} else {
+				await this.createNewFriendship(sendID, friendID, StatusFriendship.DELETED);
 			}
 		} catch (error) {
 			throw new InternalServerErrorException("Error: Unable to add friend")

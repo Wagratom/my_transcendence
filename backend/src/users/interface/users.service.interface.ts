@@ -11,4 +11,5 @@ export interface UsersServiceInterface {
 
 	updateProfile(red: Request, nickname: string, file: Multer.file): Promise<UsersResponseDto | void>;
 	addFriend(req: Request, username: string): Promise<void>;
+	deleteFriend(req: Request, username: string): Promise<void>;
 }
