@@ -27,6 +27,7 @@ export class LoginService implements LoginServiceInterface {
     let user = await this.prismaService.findUser(userData.login);
 
     if (user) {
+      this.prismaService.updateStatusOnline(user.id, true)
       const payload = { sub: user.id, username: user.login };
       const token = this.jwtService.sign(payload);
       return new LoginAuthResponseDto(user, token);

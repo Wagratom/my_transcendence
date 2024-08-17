@@ -1,5 +1,5 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
-import LoginRepositoryInterface from './interface/prisma.service.interface';
+import { Injectable } from '@nestjs/common';
+import LoginRepositoryInterface from './interface/login.repository.interface';
 import {
   ChangePasswordDto,
   ForgotPasswordDto,
@@ -8,11 +8,11 @@ import {
 } from './dto/login.dto';
 import { LoginDefaultResponseDto } from './dto/login.response.dto';
 import { PrismaService } from 'src/PrismaDB/prisma.connect';
-import { User } from '@prisma/client';
+import { StatusFriendship, User } from '@prisma/client';
 
 @Injectable()
 export default class LoginRepository implements LoginRepositoryInterface {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) { }
 
   async findUser(login: string): Promise<User> {
     let user = await this.prismaService.user.findUnique({
@@ -22,16 +22,6 @@ export default class LoginRepository implements LoginRepositoryInterface {
     });
 
     return user
-  }
-
-  async login(userData: UserCredentials): Promise<LoginDefaultResponseDto> {
-    let user = await this.prismaService.user.findUnique({
-      where: {
-        login: userData.login,
-        password: userData.password,
-      },
-    });
-    return new LoginDefaultResponseDto(user);
   }
 
   async logout(userData: UserCredentials): Promise<boolean> {
@@ -95,5 +85,16 @@ export default class LoginRepository implements LoginRepositoryInterface {
       },
     });
     return new LoginDefaultResponseDto(user);
+  }
+
+  async updateStatusOnline(userID: number, status: boolean): Promise<void> {
+    await this.prismaService.user.update({
+      where: {
+        id: userID,
+      },
+      data: {
+        isOnline: status
+      },
+    })
   }
 }
